@@ -1,1 +1,10 @@
 // custom css
+.member-login-icon{
+	display: inline-block;
+	width: 1.5em;
+	height: 1.5em;
+	content: "";
+	background: no-repeat center center;
+	background-size: 100% 100%;
+	background-image: url('../imgs/icon-member.png'); 
+}

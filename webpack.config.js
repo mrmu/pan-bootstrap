@@ -54,6 +54,17 @@ module.exports = {
                 ],
             },
             {
+                test: /\.(woff|woff2|eot|ttf|otf|png|svg|jpg|gif)$/,
+                use: {
+                  loader: 'url-loader',
+                  options: {
+                    limit: 1000, //bytes
+                    name: '[hash:7].[ext]',
+                    outputPath: 'assets'
+                  }
+                }
+            },
+            {
             	test: /\.scss$/,
             	use: extractSass.extract({
             		use: [
