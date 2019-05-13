@@ -1,0 +1,37 @@
+/*
+Theme Name: Pan Bootstrap
+Theme URI: 
+Author: audilu
+Author URI: http://audilu.com
+Description: 
+Version: 1.0
+License: MIT License
+License URI: https://opensource.org/licenses/MIT
+Text Domain: pan-bootstrap
+Tags: Bootstrap, Sass, HTML5, blank, responsive, CSS3
+This theme is licensed under the MIT.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+// Bootstrap
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "modules/bootstrap_colors";
+@import "~bootstrap/scss/bootstrap";
+
+// Modules
+@import "modules/variables";
+@import "modules/mixins";
+@import "modules/fonts";
+
+// Partials
+@import "partials/body";
+@import "partials/wordpress";
+@import "partials/utils";
+@import "partials/wrapper";
+@import "partials/header";
+@import "partials/nav";
+@import "partials/sidebar";
+@import "partials/footer";
+@import "partials/print";
