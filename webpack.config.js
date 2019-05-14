@@ -1,16 +1,12 @@
-// We are using node's native package 'path'
-// https://nodejs.org/api/path.html
+// node's native package 'path'
 const path = require('path');
-
+const Fiber = require('fibers');
 const webpack = require('webpack'); // reference to webpack Object
-
-// Including our UglifyJS
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractSass = new ExtractTextPlugin({
-    filename: "style.min.css",
-});
+const env = process.env.NODE_ENV || 'development';
+const isDevEnv = env == 'development'
 
 // Constant with our paths
 const paths = {
@@ -22,7 +18,7 @@ const paths = {
 module.exports = {
     entry: {
         main: path.join(paths.SRC, 'index.js'),
-        home: path.join(paths.SRC, 'home.js')
+        home: path.join(paths.SRC, 'home.js'),
     },
     output: {
         path: paths.DIST,
@@ -32,8 +28,8 @@ module.exports = {
 
 	externals: {
 	  jquery: 'jQuery'
-	},
-
+    },
+    
     plugins: [
         new webpack.ProvidePlugin({
           $: 'jquery',
@@ -41,7 +37,10 @@ module.exports = {
           Popper: 'popper.js'
         }),
         new UglifyJSPlugin(),
-        extractSass
+        new MiniCssExtractPlugin({
+            filename: '[name].min.css',
+            chunkFilename: '[id].min.css',
+        }),
     ],
 
     module: {
@@ -52,8 +51,7 @@ module.exports = {
                 use: [
                 'babel-loader'
                 ],
-            },
-            {
+            },{
                 test: /\.(woff|woff2|eot|ttf|otf|png|svg|jpg|gif)$/,
                 use: {
                   loader: 'url-loader',
@@ -63,43 +61,13 @@ module.exports = {
                     outputPath: 'assets'
                   }
                 }
-            },
-            {
+            },{
             	test: /\.scss$/,
-            	use: extractSass.extract({
-            		use: [
-                        {
-            			    loader: "css-loader"
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                ident: 'postcss',
-                                plugins: [
-                                    require('autoprefixer')({}),
-                                    require('cssnano')({ preset: 'default' })
-                                ],
-                                minimize: true
-                            }
-                        },
-                        {
-            			    loader: "sass-loader"
-                        }
-                    ],
-					// use style-loader in development
-					fallback: "style-loader"
-				})
-            }, 
-            {
-                test: /\.css$/, 
                 use: [
+                    isDevEnv ? {loader: "style-loader"} : { loader: MiniCssExtractPlugin.loader },
                     {
-                        loader: "style-loader"
-                    },
-                    {
-            			loader: "css-loader"
-                    },
-                    {
+                        loader: "css-loader"
+                    },{
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
@@ -109,9 +77,16 @@ module.exports = {
                             ],
                             minimize: true
                         }
-                    },
-                ]
+                    },{
+                        loader: "sass-loader",
+                        options: {
+                            implementation: require("sass"),
+                            fiber: Fiber
+                        }
+                    }
+                ],
             },
+
         ],
     },
     resolve: {

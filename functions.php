@@ -121,8 +121,11 @@ function pan_bootstrap_conditional_scripts()
 
 function pan_bootstrap_styles()
 {
-    // Normalize is loaded in Bootstrap and both are imported into the style.css via Sass
-    wp_register_style('pan-bootstrap', get_template_directory_uri() . '/dist/style.min.css', array(), '1.0.0', 'all');
+    if (is_home() || is_front_page()) {
+        wp_register_style('pan-bootstrap', get_template_directory_uri() . '/dist/home.min.css', array(), '1.0.0', 'all');
+    }else{
+        wp_register_style('pan-bootstrap', get_template_directory_uri() . '/dist/main.min.css', array(), '1.0.0', 'all');
+    }
     wp_enqueue_style('pan-bootstrap'); // Enqueue it!
 }
 
