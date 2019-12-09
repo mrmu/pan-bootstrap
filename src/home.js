@@ -1,4 +1,4 @@
-import $ from "jquery";
+// import $ from "jquery";
 import "popper.js";
 import "bootstrap";
 import './js/plugin_a';

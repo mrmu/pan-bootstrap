@@ -56,7 +56,13 @@ function pan_bootstrap_header_scripts()
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin() && !(is_home() || is_front_page())) {
 
         // Custom scripts
-        wp_register_script('pan_bootstrap_scripts', get_template_directory_uri() . '/dist/main.bundle.js', '', '1.0.0', false);
+        wp_register_script(
+            'pan_bootstrap_scripts', 
+            get_template_directory_uri() . '/dist/main.bundle.js', 
+            array('jquery'), 
+            '1.0.0', 
+            false
+        );
 
         // Enqueue it!
         wp_enqueue_script( array('pan_bootstrap_scripts') );
@@ -236,9 +242,9 @@ function pan_bootstrap_pagination()
 }
 
 // Custom Excerpts
-function pan_bootstrap_index($length) // Create 20 Word Callback for Index page Excerpts, call using pan_bootstrap_excerpt('pan_bootstrap_index');
+function pan_bootstrap_wp_index($length) // Create 20 Word Callback for Index page Excerpts, call using pan_bootstrap_excerpt('pan_bootstrap_index');
 {
-    return 20;
+    return 580;
 }
 
 // Create 40 Word Callback for Custom Post Excerpts, call using pan_bootstrap_excerpt('pan_bootstrap_custom_post');

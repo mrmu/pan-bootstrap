@@ -8,7 +8,15 @@
 body{
 	color: #555555;
 }
-
+a:hover{
+	text-decoration: none;
+}
+header.main-header{
+	height: 56px;
+}
+main{
+	margin-top: 20px;
+}
 @include media-breakpoint-up(xs) {
 
 }

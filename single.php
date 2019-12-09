@@ -16,9 +16,7 @@
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 						<!-- post title -->
-						<h1>
-							<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
-						</h1>
+						<h1 class="post_title"><?php the_title(); ?></h1>
 						<!-- /post title -->
 						<!-- Author -->
 						<p class="lead">
