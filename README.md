@@ -38,7 +38,7 @@ npm run build
 * [sass](https://github.com/sass/dart-sass)：dart sass，用來取代 node-sass
 * [sass-loader](https://www.npmjs.com/package/sass-loader)
 * [style-loader](https://www.npmjs.com/package/style-loader)
-* [uglifyjs-webpack-plugin](https://www.npmjs.com/package/uglifyjs-webpack-plugin)
+* [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin)
 * [url-loader](https://github.com/webpack-contrib/url-loader)：將檔案載成 base64 URIs，太小的圖檔就交給它
 * [webpack](https://webpack.js.org/)
 * [webpack-cli](https://webpack.js.org/api/cli/)

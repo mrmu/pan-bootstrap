@@ -2,7 +2,7 @@
 const path = require('path');
 const Fiber = require('fibers');
 const webpack = require('webpack'); // reference to webpack Object
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin'); // minify js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const env = process.env.NODE_ENV || 'development';
@@ -36,7 +36,7 @@ module.exports = {
           jQuery: 'jquery',
           Popper: 'popper.js'
         }),
-        new UglifyJSPlugin(),
+        new TerserPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].min.css',
             chunkFilename: '[id].min.css',
