@@ -25,6 +25,19 @@
 				<?php the_post_thumbnail('medium_large', array('class' => 'img-fluid') ); // Declare pixel size you need inside the array ?>
 			</a>
 			<hr>
+		<?php else: 
+			global $post;
+			$first_img = pb_get_post_1st_img($post);
+			if ($first_img) :
+			?>
+			<hr>
+			<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+				<img src="<?php echo $first_img; ?>" class="img-fluid" alt="<?php the_title(); ?>"/>
+			</a>
+			<hr>
+			<?php
+			endif;
+		?>
 		<?php endif; ?>
 		<!-- /post thumbnail -->
 

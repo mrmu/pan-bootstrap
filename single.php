@@ -57,7 +57,12 @@
 
 						<?php edit_post_link(); // Always handy to have Edit Post Links available ?>
 
-						<?php comments_template(); ?>
+						<?php 
+						// If comments are open or we have at least one comment, load up the comment template.
+						if ( comments_open() || get_comments_number() ) {
+							comments_template();
+						}
+						?>
 
 					</article>
 					<!-- /article -->
@@ -83,20 +88,6 @@
 		</div><!-- /.row -->
 	</div><!-- /.container -->
 </main>
-
-<!-- footer -->
-<footer class="footer">
-	<div class="container">
-		<div class="text-center p-2">
-			<!-- copyright -->
-			<p class="copyright">
-				&copy; <?php echo date('Y'); ?> Copyright <?php bloginfo('name'); ?>.
-			</p>
-			<!-- /copyright -->
-		</div><!-- /.row -->
-	</div><!-- /.container -->
-</footer>
-<!-- /footer -->
 
 </div>
 <!-- /wrapper -->

@@ -3,7 +3,7 @@
 	Theme support
 \*------------------------------------*/
 if (function_exists('add_theme_support'))
-{
+{    
     // Add Menu Support
     add_theme_support('menus');
 
@@ -53,6 +53,9 @@ function pan_bootstrap_nav()
 
 function pan_bootstrap_header_scripts()
 {
+    wp_deregister_script( 'jquery' );
+    wp_register_script( 'jquery', includes_url( '/js/jquery/jquery.js' ), false, NULL, true );
+    wp_enqueue_script( 'jquery' );
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin() && !(is_home() || is_front_page())) {
 
         // Custom scripts
@@ -61,12 +64,24 @@ function pan_bootstrap_header_scripts()
             get_template_directory_uri() . '/dist/main.bundle.js', 
             array('jquery'), 
             '1.0.0', 
-            false
+            true
         );
 
         // Enqueue it!
         wp_enqueue_script( array('pan_bootstrap_scripts') );
 
+        wp_localize_script(
+            'pan_bootstrap_scripts', 
+            'main_obj', 
+            array(
+                'ajax_url' => admin_url( 'admin-ajax.php' ),
+                'i18n' => array(
+                    'name_is_required' => __('Name is required', 'pan-bootstrap'),
+                    'email_is_required' => __('Email is required', 'pan-bootstrap'),
+                    'comment_is_required' => __('Comment is required', 'pan-bootstrap')
+                )
+            )
+        );
     }
 }
 
@@ -128,9 +143,21 @@ function pan_bootstrap_conditional_scripts()
 function pan_bootstrap_styles()
 {
     if (is_home() || is_front_page()) {
-        wp_register_style('pan-bootstrap', get_template_directory_uri() . '/dist/home.min.css', array(), '1.0.0', 'all');
+        wp_register_style(
+            'pan-bootstrap', 
+            get_template_directory_uri() . '/dist/home.min.css', 
+            array(), 
+            filemtime(get_template_directory() . '/dist/home.min.css'), 
+            'all'
+        );
     }else{
-        wp_register_style('pan-bootstrap', get_template_directory_uri() . '/dist/main.min.css', array(), '1.0.0', 'all');
+        wp_register_style(
+            'pan-bootstrap', 
+            get_template_directory_uri() . '/dist/main.min.css', 
+            array(), 
+            filemtime(get_template_directory() . '/dist/main.min.css'), 
+            'all'
+        );
     }
     wp_enqueue_style('pan-bootstrap'); // Enqueue it!
 }
@@ -162,6 +189,12 @@ function remove_category_rel_from_category_list($thelist)
 {
     return str_replace('rel="category tag"', 'rel="tag"', $thelist);
 }
+
+// Remove Emoji
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
 // Add page slug to body class, love this - Credit: Starkers Wordpress Theme
 function add_slug_to_body_class($classes)
@@ -463,91 +496,32 @@ function pan_bootstrap_shortcode_demo_2($atts, $content = null) // Demo Heading 
     return '<h2>' . $content . '</h2>';
 }
 
-function load_events_ajax() {
-    global $wpdb;
-    $event_date = sanitize_text_field($_POST['event_date']);
-
-    //do sth you want...
-    $curMonth = Date('Y-n', strtotime($event_date)); //載入當月events
-    $arr = array(
-        array(
-            'Date' => $curMonth.'-20', 
-            'Training' => array(
-                array(
-                    'ID' => 1,
-                    'Title' => '胸', 
-                    'Link' => '', 
-                    'Exercise' => array(
-                        array(
-                            'id' => 1, 
-                            'name' => '平胸臥推',
-                            'sets' => array(
-                                array(
-                                    'times' => 4,
-                                    'loadLB' => 100,
-                                    'resttime' => 60,
-                                    'tireDegree' => 1
-                                ),
-                            )
-                        ),
-                        array(
-                            'id' => 2, 
-                            'name' => '上胸臥推',
-                            'sets' => array(
-                                array(
-                                    'times' => 4,
-                                    'loadLB' => 100,
-                                    'resttime' => 60,
-                                    'tireDegree' => 5
-                                ),
-                                array(
-                                    'times' => 4,
-                                    'loadLB' => 110,
-                                    'resttime' => 60,
-                                    'tireDegree' => 6
-                                ),
-                            )
-                        )
-                    )
-                ),
-                array(
-                    'ID' => 2,
-                    'Title' => '肩', 
-                    'Link' => '', 
-                    'Exercise' => array(
-                        array(
-                            'id' => 99, 
-                            'name' => '軍式肩推',
-                            'sets' => array(
-                                array(
-                                    'times' => 4,
-                                    'loadLB' => 40,
-                                    'resttime' => 60,
-                                    'tireDegree' => 3
-                                ),
-                            )
-                        )
-                    )
-                )
-            )
-        ),
-        array(
-            'Date' => $curMonth.'-17', 
-            'Training' => array(
-                array(
-                    'Title' => '背', 
-                    'Link' => '', 
-                )
-            )
-        ),
-    
-    );
-    // echo json_encode($arr);
-
-    $rtn_ary = array('code'=>'1', 'text'=>'成功。', 'data'=>$arr, 'event_date'=>$event_date);
-
-    echo json_encode($rtn_ary);
-    die();
+/**
+ * Custom callback for outputting comments 
+ */
+function bootstrap_comment( $comment, $args, $depth ) {
+    $GLOBALS['comment'] = $comment; 
+    ?>
+    <?php if ( $comment->comment_approved == '1' ): ?>
+    <li class="media">
+        <div class="media-left">
+            <?php echo get_avatar( $comment ); ?>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading"><?php comment_author_link() ?></h4>
+            <time><a href="#comment-<?php comment_ID() ?>" pubdate><?php comment_date() ?> at <?php comment_time() ?></a></time>
+            <?php comment_text() ?>
+        </div>
+    <?php endif;
 }
-add_action( 'wp_ajax_load_events_ajax', 'load_events_ajax' ); // 針對已登入的使用者
-add_action( 'wp_ajax_nopriv_load_events_ajax', 'load_events_ajax' ); // 針對未登入的使用者
+
+function pb_get_post_1st_img($post) {
+    $first_img = '';
+    ob_start();
+    ob_end_clean();
+    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+    if (!empty($matches[1][0])) {
+        $first_img = $matches[1][0];
+    }
+    return $first_img;
+}

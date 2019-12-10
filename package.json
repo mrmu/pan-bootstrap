@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "highlight.js": "^9.16.2",
     "popper.js": "^1.16.0"
   }
 }
