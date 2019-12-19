@@ -25,7 +25,6 @@ document.querySelectorAll('pre').forEach((block) => {
 
 (function($) {
 	$(function() {
-		console.log(main_obj);
 		/*
 		basic javascript form validation
 		For more information: https://getbootstrap.com/docs/4.3/components/forms/#validation

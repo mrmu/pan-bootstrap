@@ -9,6 +9,6 @@ import "./sass/home.scss";
 
 (function($) {
 	$(function() {
-		call_plugin_b();
+		// call_plugin_b();
 	});
 })(jQuery);

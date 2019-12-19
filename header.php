@@ -11,19 +11,6 @@
 		
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="<?php bloginfo('description'); ?>">
-		<meta property="og:locale" content="zh_TW" />
-		<meta property="og:type" content="object" />
-		<meta property="og:title" content="" />
-		<meta property="og:url" content="" />
-		<meta property="og:site_name" content="Trainee" />
-		<meta property="og:image" content="" />
-		<meta property="og:image:secure_url" content="" />
-		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:title" content="" />
-		<meta name="twitter:image" content="" />
-		<meta property="fb:admins" content=""/>
-
 		<?php wp_head(); ?>
 
 	</head>
