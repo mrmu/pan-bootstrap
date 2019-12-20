@@ -8,6 +8,10 @@ import hi_xml from 'highlight.js/lib/languages/xml';
 import hi_bash from 'highlight.js/lib/languages/bash';
 import "popper.js";
 import "bootstrap";
+import '@fortawesome/fontawesome-free/js/fontawesome';
+import '@fortawesome/fontawesome-free/js/solid';
+// import '@fortawesome/fontawesome-free/js/regular';
+// import '@fortawesome/fontawesome-free/js/brands';
 import "./sass/style.scss";
 
 "use strict";
@@ -25,6 +29,13 @@ document.querySelectorAll('pre').forEach((block) => {
 
 (function($) {
 	$(function() {
+		$('#buttonsearch').click(function(){
+			// for pc behavior
+			$('#formsearch').toggleClass( "d-xl-none" ).toggleClass( "pos_fixed" );
+			$('#searchbox').focus()
+			$('.openclosesearch').toggle();
+		});
+
 		/*
 		basic javascript form validation
 		For more information: https://getbootstrap.com/docs/4.3/components/forms/#validation

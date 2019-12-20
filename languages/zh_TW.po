@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pan Bootstrap\n"
-"POT-Creation-Date: 2019-12-10 11:01+0800\n"
-"PO-Revision-Date: 2019-12-10 11:04+0800\n"
+"POT-Creation-Date: 2019-12-20 17:38+0800\n"
+"PO-Revision-Date: 2019-12-20 17:38+0800\n"
 "Last-Translator: Audi Lu <mrmu@mrmu.com.tw>\n"
 "Language-Team: Audi Lu <mrmu@mrmu.com.tw>\n"
 "Language: zh_TW\n"
@@ -41,61 +41,61 @@ msgstr "電子信箱"
 msgid "Comment"
 msgstr "迴響"
 
-#: comments.php:104
+#: functions.php:91
 msgid "Name is required"
 msgstr "姓名為必填"
 
-#: comments.php:111
+#: functions.php:92
 msgid "Email is required"
 msgstr "電子信箱為必填"
 
-#: comments.php:118
+#: functions.php:93
 msgid "Comment is required"
 msgstr "迴響為必填"
 
-#: functions.php:141
+#: functions.php:180
 msgid "Header Menu"
 msgstr "頁首選單"
 
-#: functions.php:142
+#: functions.php:181
 msgid "Sidebar Menu"
 msgstr "邊欄選單"
 
-#: functions.php:143
+#: functions.php:182
 msgid "Extra Menu"
 msgstr ""
 
-#: functions.php:189
+#: functions.php:234
 msgid "Widget Area 1"
 msgstr ""
 
-#: functions.php:190 functions.php:201
+#: functions.php:235 functions.php:246
 msgid "Description for this widget-area..."
 msgstr "小工具區域的描述..."
 
-#: functions.php:200
+#: functions.php:245
 msgid "Widget Area 2"
 msgstr ""
 
-#: functions.php:277
+#: functions.php:322
 msgid "Read more"
 msgstr "閱讀更多"
 
-#: functions.php:338
+#: functions.php:383
 #, php-format
 msgid "<cite class=\"fn\">%s</cite> <span class=\"says\">says:</span>"
 msgstr "<cite class=\"fn\">%s</cite> <span class=\"says\">說道：</span>"
 
-#: functions.php:341
+#: functions.php:386
 msgid "Your comment is awaiting moderation."
 msgstr "你的留言正在審核中。"
 
-#: functions.php:347
+#: functions.php:393
 #, php-format
 msgid "%1$s at %2$s"
 msgstr "%1$s 於 %2$s"
 
-#: functions.php:347
+#: functions.php:393
 msgid "(Edit)"
 msgstr "（編輯）"
 
@@ -103,50 +103,50 @@ msgstr "（編輯）"
 msgid "Add a menu"
 msgstr "新增一個選單"
 
-#: loop.php:13 single.php:23
+#: loop.php:13 page.php:23 single.php:23
 msgid "Published by"
 msgstr "作者："
 
-#: loop.php:18 single.php:32
+#: loop.php:18 page.php:32 single.php:32
 msgid "Leave your thoughts"
 msgstr "留言"
 
-#: loop.php:18 single.php:32
+#: loop.php:18 page.php:32 single.php:32
 msgid "1 Comment"
 msgstr "1 則迴響"
 
-#: loop.php:18 single.php:32
+#: loop.php:18 page.php:32 single.php:32
 msgid "% Comments"
 msgstr "% 則迴響"
 
-#: loop.php:58 single.php:77
+#: loop.php:58 page.php:77 single.php:77
 msgid "Sorry, nothing to display."
 msgstr ""
 
-#: search.php:10
-#, php-format
-msgid "%s Search Results for "
-msgstr "%s 的搜尋結果"
-
-#: searchform.php:3
-msgid "To search, type and hit enter."
-msgstr "輸入關鍵字並按下 Enter 搜尋"
-
-#: searchform.php:5
-msgid "Search"
-msgstr "搜尋"
-
-#: single.php:49
+#: page.php:49 single.php:49
 msgid "Tags: "
 msgstr "標籤："
 
-#: single.php:53
+#: page.php:53 single.php:53
 msgid "Categorised in: "
 msgstr "分類："
 
-#: single.php:56
+#: page.php:56 single.php:56
 msgid "This post was written by "
 msgstr "本文作者是"
+
+#: search.php:10
+#, php-format
+msgid "%1$s Search Results for \"%2$s\" "
+msgstr "搜尋「%2$s」共有 %1$s 個結果 "
+
+#: searchform.php:7
+msgid "To search, type and hit enter."
+msgstr "輸入關鍵字並按下 Enter 搜尋"
+
+#: searchform.php:10
+msgid "Search"
+msgstr "搜尋"
 
 #. Theme Name of the plugin/theme
 msgid "Pan Bootstrap"

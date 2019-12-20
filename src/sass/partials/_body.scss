@@ -28,6 +28,27 @@ main{
 
 /* Comments */
 
+.media-list{
+	list-style-type: none;
+    padding-left: 0;
+}
+ul.children{
+	list-style-type: none;
+}
+.comment-body{
+    border: 1px solid #ccc;
+	margin: 15px;
+	.comment-content-wrap{
+		padding: 15px;
+	}
+}
+.comment-author{
+    background-color: #f3f3f3;
+    border-bottom: 1px solid #ccc;
+}
+main article.post img{
+	margin: 0;
+}
 li.media {
 	margin-top: 20px;
 	img.avatar{

@@ -15,10 +15,9 @@
 
 	</head>
 	<body <?php body_class(); ?>>
-
 		<!-- header -->
 		<header class="header main-header clear">
-			<nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
+			<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
 				<div class="container">
 					<a class="navbar-brand" href="<?php echo home_url(); ?>">
 						<?php bloginfo('name'); ?>
@@ -26,13 +25,11 @@
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<?php pan_bootstrap_nav(); ?>
 					</div>
 				</div>
 				<!-- /.container -->
 			</nav>
-
 		</header>
 		<!-- /header -->

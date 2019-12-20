@@ -37,7 +37,7 @@
 		</h2>
 	
 		<ul class="media-list">
-			<?php wp_list_comments( array( 'callback' => 'bootstrap_comment' ) ); ?>
+			<?php wp_list_comments( array( 'callback' => 'pan_bootstrap_comments' ) ); ?>
 		</ul>
 	
 	<?php

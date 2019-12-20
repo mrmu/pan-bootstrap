@@ -30,13 +30,22 @@ require_once('inc/class-wp-bootstrap-navwalker.php');
 
 function pan_bootstrap_nav()
 {
+    $search_btn = '<button type="button" class="d-none d-sm-inline-block nav-link buttonsearch" id="buttonsearch">
+        <i class="fas fa-search openclosesearch"></i>
+        <i class="fas fa-times openclosesearch" style="display:none"></i>
+        </button>';
+    $search_form = get_search_form( false ); // Return not echo
+
+    $items_wrap = '<ul id="%1$s" class="%2$s">%3$s';
+    $items_wrap .= sprintf( '<li id="searchItem" class="menu-item nav-item">%1$s</li></ul>', $search_btn.$search_form );
 	wp_nav_menu(
 	array(
 		'theme_location'  => 'header-menu',
 		'menu'            => '',
 		'container'       => 'div',
 		'container_class' => 'collapse navbar-collapse',
-		'container_id'    => 'bs-example-navbar-collapse-1',
+        'container_id'    => 'bs-example-navbar-collapse-1',
+        'items_wrap'      => $items_wrap,
 		'menu_class'      => 'navbar-nav ml-auto',
 		'menu_id'         => '',
 		'echo'            => true,
@@ -378,17 +387,35 @@ function pan_bootstrap_comments($comment, $args, $depth)
 	<br />
 <?php endif; ?>
 
-	<div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
-		<?php
-			printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
-		?>
-	</div>
-
-	<?php comment_text() ?>
-
-	<div class="reply">
-	<?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-	</div>
+    <div class="comment-content-wrap">
+        <div class="comment-meta mb-3 commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
+            <?php
+                printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
+            ?>
+        </div>
+        <?php comment_text() ?>
+        <div class="reply">
+            <?php 
+            // comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) 
+            $myclass = 'btn btn-primary';
+            echo preg_replace( 
+                '/comment-reply-link/', 
+                'comment-reply-link ' . $myclass, 
+                get_comment_reply_link(
+                    array_merge( 
+                        $args, 
+                        array(
+                            'add_below' => $add_below, 
+                            'depth' => $depth, 
+                            'max_depth' => $args['max_depth']
+                        )
+                    )
+                ), 
+                1 
+            ); 
+            ?>
+        </div>
+    </div>
 	<?php if ( 'div' != $args['style'] ) : ?>
 	</div>
 	<?php endif; ?>
