@@ -35,7 +35,6 @@ document.querySelectorAll('pre').forEach((block) => {
 			$('#searchbox').focus()
 			$('.openclosesearch').toggle();
 		});
-
 		/*
 		basic javascript form validation
 		For more information: https://getbootstrap.com/docs/4.3/components/forms/#validation

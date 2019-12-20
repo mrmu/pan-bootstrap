@@ -71,11 +71,13 @@ function pan_bootstrap_header_scripts()
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin() && !(is_home() || is_front_page())) {
 
         // Custom scripts
-        wp_register_script(
+        $main_script_uri = get_template_directory_uri() . '/dist/main.bundle.js';
+        $main_script_dir = get_template_directory() . '/dist/main.bundle.js';
+        wp_enqueue_script( 
             'pan_bootstrap_scripts', 
-            get_template_directory_uri() . '/dist/main.bundle.js', 
+            $main_script_uri,  //child theme dir
             array('jquery'), 
-            '1.0.0', 
+            filemtime( $main_script_dir ), 
             true
         );
 
