@@ -198,6 +198,9 @@ function pan_bootstrap_conditional_scripts()
 
 function pan_bootstrap_styles() {
 
+    if (!is_admin()) {
+        wp_dequeue_style( 'wp-block-library' );
+    }
 	if (is_singular()) {
 		wp_enqueue_style( 
 			'single_styles', 

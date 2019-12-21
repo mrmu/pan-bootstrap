@@ -18,22 +18,28 @@
 						<!-- post title -->
 						<h1 class="post_title"><?php the_title(); ?></h1>
 						<!-- /post title -->
-						<!-- Author -->
-						<p class="lead">
-							<span class="author"><?php _e( 'Published by', 'pan-bootstrap' ); ?> <?php the_author_posts_link(); ?></span>
-						</p>
 						<hr>
 						<!-- Date -->
 						<p>
+							<span class="author"><?php _e( 'Published by', 'pan-bootstrap' ); ?> <?php the_author_posts_link(); ?></span>
+							<span class="text-muted">|</span>
 							<span class="date">
-								<?php the_time('F j, Y'); ?> <?php the_time('g:i a'); ?>
+								<?php the_time('Y/m/d'); ?> <?php the_time('H:i:s'); ?>
 							</span>
 							<span class="text-muted">|</span>
 							<span class="comments"><?php if (comments_open( get_the_ID() ) ) comments_popup_link( __( 'Leave your thoughts', 'pan-bootstrap' ), __( '1 Comment', 'pan-bootstrap' ), __( '% Comments', 'pan-bootstrap' )); ?></span>
 						</p>
 						<!-- /post details -->
 						<hr>
-
+						<p class="lead">
+							<!-- Your like button code -->
+							<div class="fb-like" 
+								data-href="<?php the_permalink();?>" 
+								data-layout="standard" 
+								data-action="like" 
+								data-show-faces="true">
+							</div>
+						</p>
 						<!-- post thumbnail -->
 						<?php if ( has_post_thumbnail()) : // Check if Thumbnail exists ?>
 							<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
