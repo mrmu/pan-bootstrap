@@ -70,32 +70,32 @@ function pan_bootstrap_header_scripts()
 
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin() && !(is_home() || is_front_page())) {
 
-        // Custom scripts
-        $main_script_uri = get_template_directory_uri() . '/dist/main.bundle.js';
-        $main_script_dir = get_template_directory() . '/dist/main.bundle.js';
-        wp_enqueue_script( 
-            'pan_bootstrap_scripts', 
-            $main_script_uri,  //child theme dir
-            array('jquery'), 
-            filemtime( $main_script_dir ), 
-            true
-        );
+        // // Custom scripts
+        // $main_script_uri = get_template_directory_uri() . '/dist/main.bundle.js';
+        // $main_script_dir = get_template_directory() . '/dist/main.bundle.js';
+        // wp_enqueue_script( 
+        //     'pan_bootstrap_scripts', 
+        //     $main_script_uri,  //child theme dir
+        //     array('jquery'), 
+        //     filemtime( $main_script_dir ), 
+        //     true
+        // );
 
-        // Enqueue it!
-        wp_enqueue_script( array('pan_bootstrap_scripts') );
+        // // Enqueue it!
+        // wp_enqueue_script( array('pan_bootstrap_scripts') );
 
-        wp_localize_script(
-            'pan_bootstrap_scripts', 
-            'main_obj', 
-            array(
-                'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'i18n' => array(
-                    'name_is_required' => __('Name is required', 'pan-bootstrap'),
-                    'email_is_required' => __('Email is required', 'pan-bootstrap'),
-                    'comment_is_required' => __('Comment is required', 'pan-bootstrap')
-                )
-            )
-        );
+        // wp_localize_script(
+        //     'pan_bootstrap_scripts', 
+        //     'main_obj', 
+        //     array(
+        //         'ajax_url' => admin_url( 'admin-ajax.php' ),
+        //         'i18n' => array(
+        //             'name_is_required' => __('Name is required', 'pan-bootstrap'),
+        //             'email_is_required' => __('Email is required', 'pan-bootstrap'),
+        //             'comment_is_required' => __('Comment is required', 'pan-bootstrap')
+        //         )
+        //     )
+        // );
     }
 }
 
@@ -134,46 +134,100 @@ function add_script_tag_attributes($tag, $handle)
 
 function pan_bootstrap_conditional_scripts()
 {
-    if (is_front_page() || is_home()) {
-        $home_script_uri = get_template_directory_uri() . '/dist/home.bundle.js';
-        $home_script_dir = get_template_directory() . '/dist/home.bundle.js';
-        wp_enqueue_script( 
-            'home_scripts', 
-            $home_script_uri,  //child theme dir
+    // Conditional script(s)
+    if (is_singular()) {
+		global $post;
+        wp_register_script(
+            'single_js', 
+            get_template_directory_uri() . '/dist/single.min.js', 
             array('jquery'), 
-            filemtime( $home_script_dir ), 
-            true
+			filemtime( (dirname( __FILE__ )) . '/dist/single.min.js' ),
+			true
         );
+		wp_enqueue_script('single_js');
         wp_localize_script(
-            'home_scripts', 
-            'home_obj', 
-            array(
+            'single_js', 
+            'single_obj', 
+            array( 
+                'ajax_url' => admin_url( 'admin-ajax.php' ),
+                'i18n' => array(
+                    'name_is_required' => __('Name is required', 'pan-bootstrap'),
+                    'email_is_required' => __('Email is required', 'pan-bootstrap'),
+                    'comment_is_required' => __('Comment is required', 'pan-bootstrap')
+                )
+            )
+        );		
+	}
+	elseif (is_search() || is_archive()) {
+        wp_register_script(
+            'archive_js', 
+            get_template_directory_uri() . '/dist/archive.min.js', 
+            array('jquery'), 
+			filemtime( (dirname( __FILE__ )) . '/dist/archive.min.js' ),
+			true
+        ); 
+		wp_enqueue_script('archive_js');
+        wp_localize_script(
+            'archive_js', 
+            'arch_obj', 
+            array( 
+				's' => get_search_query(),
                 'ajax_url' => admin_url( 'admin-ajax.php' )
             )
+        );	
+	}
+	elseif (is_home() || is_front_page()) {
+        wp_register_script(
+            'home_js', 
+            get_template_directory_uri() . '/dist/home.min.js', 
+            array('jquery'), 
+			filemtime( (dirname( __FILE__ )) . '/dist/home.min.js' ),
+			true
         );
+		wp_enqueue_script('home_js');
+        wp_localize_script(
+            'home_js', 
+            'home_obj', 
+            array( 
+                'ajax_url' => admin_url( 'admin-ajax.php' )
+            )
+        );	
     }
+
 }
 
-function pan_bootstrap_styles()
-{
-    if (is_home() || is_front_page()) {
-        wp_register_style(
-            'pan-bootstrap', 
-            get_template_directory_uri() . '/dist/home.min.css', 
-            array(), 
-            filemtime(get_template_directory() . '/dist/home.min.css'), 
-            'all'
-        );
-    }else{
-        wp_register_style(
-            'pan-bootstrap', 
-            get_template_directory_uri() . '/dist/main.min.css', 
-            array(), 
-            filemtime(get_template_directory() . '/dist/main.min.css'), 
-            'all'
-        );
+function pan_bootstrap_styles() {
+
+	if (is_singular()) {
+		wp_enqueue_style( 
+			'single_styles', 
+			get_template_directory_uri() . '/dist/single.min.css', 
+			array(), 
+			filemtime( (dirname( __FILE__ )) . '/dist/single.min.css' ),
+			'all'
+		);
+	}
+
+	if (is_search() || is_archive()) {
+		wp_enqueue_style( 
+			'archive_styles', 
+			get_template_directory_uri() . '/dist/archive.min.css', 
+			array(), 
+			filemtime( (dirname( __FILE__ )) . '/dist/archive.min.css' ),
+			'all'
+		);
+	}
+
+	if (is_home() || is_front_page()) {
+		wp_enqueue_style( 
+			'home_styles', 
+			get_template_directory_uri() . '/dist/home.min.css', 
+			array(), 
+			filemtime( (dirname( __FILE__ )) . '/dist/home.min.css' ),
+			'all'
+		);
     }
-    wp_enqueue_style('pan-bootstrap'); // Enqueue it!
+
 }
 
 function register_pan_bootstrap_menu()

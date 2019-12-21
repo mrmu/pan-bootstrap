@@ -1,5 +1,5 @@
 import './global';
-import "./sass/home.scss";
+import "./sass/archive.scss";
 
 "use strict";
 

@@ -32,6 +32,7 @@
   "dependencies": {
     "autoprefixer": "^9.7.3",
     "bootstrap": "^4.4.1",
+    "glob": "^7.1.6",
     "highlight.js": "^9.16.2",
     "popper.js": "^1.16.0"
   }

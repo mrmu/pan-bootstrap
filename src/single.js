@@ -1,21 +1,15 @@
-// import $ from "jquery";
+import './global';
+import "./sass/style.scss";
 import hljs from 'highlight.js/lib/highlight';
-import 'highlight.js/styles/github.css';
 import hi_js from 'highlight.js/lib/languages/javascript';
 import hi_css from 'highlight.js/lib/languages/css';
 import hi_php from 'highlight.js/lib/languages/php';
 import hi_xml from 'highlight.js/lib/languages/xml';
 import hi_bash from 'highlight.js/lib/languages/bash';
-import "popper.js";
-import "bootstrap";
-import '@fortawesome/fontawesome-free/js/fontawesome';
-import '@fortawesome/fontawesome-free/js/solid';
-// import '@fortawesome/fontawesome-free/js/regular';
-// import '@fortawesome/fontawesome-free/js/brands';
-import "./sass/style.scss";
+import 'highlight.js/styles/github.css';
 
 "use strict";
-// hljs.initHighlightingOnLoad();
+
 hljs.registerLanguage('javascript', hi_js);
 hljs.registerLanguage('xml', hi_xml);
 hljs.registerLanguage('bash', hi_bash);
@@ -29,12 +23,6 @@ document.querySelectorAll('pre').forEach((block) => {
 
 (function($) {
 	$(function() {
-		$('#buttonsearch').click(function(){
-			// for pc behavior
-			$('#formsearch').toggleClass( "d-xl-none" ).toggleClass( "pos_fixed" );
-			$('#searchbox').focus()
-			$('.openclosesearch').toggle();
-		});
 		/*
 		basic javascript form validation
 		For more information: https://getbootstrap.com/docs/4.3/components/forms/#validation
@@ -50,21 +38,21 @@ document.querySelectorAll('pre').forEach((block) => {
 				d3 		= document.getElementById("d3");
 				
 			if (x === null || x === "") {
-				d1.innerHTML = main_obj.i18n.name_is_required;
+				d1.innerHTML = single_obj.i18n.name_is_required;
 				flag = false;
 			} else {
 				d1.innerHTML = "";
 			}
 			
 			if (y === null || y === "") {
-				d2.innerHTML = main_obj.i18n.email_is_required;
+				d2.innerHTML = single_obj.i18n.email_is_required;
 				flag = false;
 			} else {
 				d2.innerHTML = "";
 			}
 			
 			if (z === null || z === "") {
-				d3.innerHTML = main_obj.i18n.comment_is_required;
+				d3.innerHTML = single_obj.i18n.comment_is_required;
 				flag = false;
 			} else {
 				d3.innerHTML = "";

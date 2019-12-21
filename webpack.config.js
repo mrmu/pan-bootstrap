@@ -4,25 +4,63 @@ const Fiber = require('fibers');
 const webpack = require('webpack'); // reference to webpack Object
 const TerserPlugin = require('terser-webpack-plugin'); // minify js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const glob = require('glob');
 
 const env = process.env.NODE_ENV || 'development';
-const isDevEnv = env == 'development'
+const isDevEnv = env == 'development';
 
 // Constant with our paths
 const paths = {
+    ROOT: path.resolve(__dirname),
     DIST: path.resolve(__dirname, 'dist'),
-    SRC: path.resolve(__dirname, 'src')
-};
-
+    SRC: path.resolve(__dirname, 'src'),
+    PLUGINS: path.resolve(__dirname, '../../plugins'),
+}
+// const global_paths = {
+//     css : [
+//         // './css/3TH_PARTY.css',
+//         // './style.css',
+//         // paths.PLUGINS + '/MY_PLUGIN/css/display.css',
+//     ],
+//     js : [
+//         paths.SRC + '/global.js',
+//         // paths.PLUGINS + '/MY_PLUGIN/js/display.js',
+//     ]
+// }
+const home_paths = {
+    css : [
+    ],
+    js : [
+        paths.SRC + '/home.js'
+    ]
+}
+const archive_paths = {
+    css : [
+    ],
+    js : [
+        paths.SRC + '/archive.js'
+    ]
+}
+const single_paths = {
+    css : [
+    ],
+    js : [
+        paths.SRC + '/single.js'
+    ]
+}
 // Webpack configuration
 module.exports = {
     entry: {
-        main: path.join(paths.SRC, 'index.js'),
-        home: path.join(paths.SRC, 'home.js'),
+        // main: path.join(paths.SRC, 'index.js'),
+        // home: path.join(paths.SRC, 'home.js'),
+        // global : glob.sync("" + global_paths.js + ""),
+        home : glob.sync("" + home_paths.js + ""),
+        archive : glob.sync("" + archive_paths.js + ""),
+        single : glob.sync("" + single_paths.js + "")
     },
     output: {
         path: paths.DIST,
-        filename: '[name].bundle.js'
+        filename: '[name].min.js'
     },
     watch: true,
 
@@ -49,7 +87,7 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: [
-                'babel-loader'
+                    'babel-loader'
                 ],
             },{
                 test: /\.(woff|woff2|eot|ttf|otf|png|svg|jpg|gif)$/,
