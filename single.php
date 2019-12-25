@@ -35,9 +35,11 @@
 							<!-- Your like button code -->
 							<div class="fb-like" 
 								data-href="<?php the_permalink();?>" 
-								data-layout="standard" 
+								data-width="" 
+								data-layout="button" 
 								data-action="like" 
-								data-show-faces="true">
+								data-size="small" 
+								data-share="false">
 							</div>
 						</p>
 						<!-- post thumbnail -->
