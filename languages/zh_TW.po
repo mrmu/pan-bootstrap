@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pan Bootstrap\n"
 "POT-Creation-Date: 2019-12-20 17:38+0800\n"
-"PO-Revision-Date: 2019-12-20 17:38+0800\n"
+"PO-Revision-Date: 2019-12-25 17:39+0800\n"
 "Last-Translator: Audi Lu <mrmu@mrmu.com.tw>\n"
 "Language-Team: Audi Lu <mrmu@mrmu.com.tw>\n"
 "Language: zh_TW\n"
@@ -121,7 +121,7 @@ msgstr "% 則迴響"
 
 #: loop.php:58 page.php:77 single.php:77
 msgid "Sorry, nothing to display."
-msgstr ""
+msgstr "抱歉，沒有找到您要的資訊。"
 
 #: page.php:49 single.php:49
 msgid "Tags: "
