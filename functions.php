@@ -1,4 +1,150 @@
 <?php
+
+/**
+ * Retrieve category parents.
+ *
+ * @param int $id Category ID.
+ * @param array $visited Optional. Already linked to categories to prevent duplicates.
+ * @return string|WP_Error A list of category parents on success, WP_Error on failure.
+ */
+function custom_get_category_parents( $id, $position_length, $visited = array() ) {
+    $chain = '';
+    $parent = get_term( $id, 'category' );
+    if ( is_wp_error( $parent ) ) 
+        return $parent;
+
+    $name = $parent->name;
+
+    if ( $parent->parent && ( $parent->parent != $parent->term_id ) && !in_array( $parent->parent, $visited ) ) {
+        $visited[] = $parent->parent;
+        $obj_chain = custom_get_category_parents( $parent->parent, $position_length, $visited );
+        $chain .= $obj_chain['chain'];
+        $position_length = $obj_chain['length'];
+    }
+    $chain .= 
+        '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">'.
+            '<a href="' . esc_url( get_category_link( $parent->term_id ) ) . '" itemprop="item" itemscope itemtype="https://schema.org/WebPage">' . 
+                '<span itemprop="name">'.$name.'</span>'. 
+            '</a>' . 
+            '<meta itemprop="position" content="'.$position_length++.'" />'.
+        '</li>';    
+    return array(
+        'chain' => $chain, 
+        'length' => $position_length
+    );
+}
+
+function bootstrap_breadcrumb() {
+    global $post;
+    $home_txt = '<i class="fas fa-home"></i>';
+    $li_atts = 'itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"';
+    $li_a_atts = 'itemprop="item" itemscope itemtype="https://schema.org/WebPage"';
+    $item_wrap_s = '<span itemprop="name">';
+    $item_wrap_e = '</span>';
+    $position_length = 1;
+
+    $html = '<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">';
+    if ( (is_front_page()) || (is_home()) ) {
+        $html .= '<li class="breadcrumb-item active">'.$home_txt.'</li>';
+    }else {
+        $html .= 
+            '<li class="breadcrumb-item">'.
+                '<a href="'.esc_url(home_url('/')).'" '.$li_a_atts.'>'.
+                    $home_txt.
+                '</a>'.
+                '<meta itemprop="position" content="'.$position_length++.'" />'.
+            '</li>'
+        ;
+        
+        if ( is_attachment() ) {
+            $parent = get_post($post->post_parent);
+            $categories = get_the_category($parent->ID);
+            if ( $categories[0] ) {
+                $obj_chain = custom_get_category_parents( $categories[0], $position_length );
+                $position_length = $obj_chain['length'];
+                $html .= $obj_chain['chain'];
+            }
+            $html .= 
+                '<li class="breadcrumb-item" '.$li_atts.'>'.
+                    '<a href="' . esc_url( get_permalink( $parent ) ) . '" '.$li_a_atts.'>' . 
+                        $parent->post_title . 
+                    '</a>'.
+                    '<meta itemprop="position" content="'.$position_length++.'" />'.
+                '</li>';
+            $html .= 
+                '<li class="breadcrumb-item active" '.$li_atts.'>' . 
+                    get_the_title() . 
+                    '<meta itemprop="position" content="'.$position_length++.'" />'.
+                '</li>';
+        }elseif ( is_category() ) {
+            $category = get_category( get_query_var( 'cat' ) );
+            if ( $category->parent != 0 ) {
+                $obj_chain = custom_get_category_parents( $category->parent, $position_length );
+                $position_length = $obj_chain['length'];
+                $html .= $obj_chain['chain'];
+            }
+            $html .= 
+                '<li class="breadcrumb-item active" '.$li_atts.'>' . 
+                    $item_wrap_s. single_cat_title( '', false ) . $item_wrap_e .
+                    '<meta itemprop="position" content="'.$position_length++.'" />'.
+                '</li>';
+        }elseif ( is_page() && !is_front_page() ) {
+            $parent_id = $post->post_parent;
+            $parent_pages = array();
+            while ( $parent_id ) {
+                $page = get_page($parent_id);
+                $parent_pages[] = $page;
+                $parent_id = $page->post_parent;
+            }
+            $parent_pages = array_reverse( $parent_pages );
+            if ( !empty( $parent_pages ) ) {
+                foreach ( $parent_pages as $parent ) {
+                    $html .= 
+                        '<li class="breadcrumb-item" '.$li_atts.'>'.
+                            '<a href="' . esc_url( get_permalink( $parent->ID ) ) . '" '.$li_a_atts.'>' . 
+                                get_the_title( $parent->ID ) . 
+                            '</a>'.
+                            '<meta itemprop="position" content="'.$position_length++.'" />'.
+                        '</li>';
+                }
+            }
+            $html .= '<li class="breadcrumb-item active" '.$li_atts.'>' . get_the_title() . '</li>';
+        }elseif ( is_singular( 'post' ) ) {
+            $categories = get_the_category();
+            if ( $categories[0] ) {
+                $obj_chain = custom_get_category_parents( $categories[0], $position_length );
+                $position_length = $obj_chain['length'];
+                $html .= $obj_chain['chain'];
+            }
+            $html .= 
+                '<li class="breadcrumb-item active" '.$li_atts.'>' . 
+                    $item_wrap_s . get_the_title() . $item_wrap_e .
+                    '<meta itemprop="position" content="'.$position_length++.'" />'.
+                '</li>'
+            ;
+        }elseif ( is_tag() ) {
+            $html .= '<li class="breadcrumb-item active" '.$li_atts.'>' . $item_wrap_s . single_tag_title( '', false ) . $item_wrap_e . '</li>';
+        }elseif ( is_day() ) {
+            $html .= '<li class="breadcrumb-item" '.$li_atts.'><a href="' . esc_url( get_year_link( get_the_time( 'Y' ) ) ) . '" '.$li_a_atts.'>' . get_the_time( 'Y' ) . '</a></li>';
+            $html .= '<li class="breadcrumb-item" '.$li_atts.'><a href="' . esc_url( get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) ) . '" '.$li_a_atts.'>' . get_the_time( 'm' ) . '</a></li>';
+            $html .= '<li class="breadcrumb-item active" '.$li_atts.'>' . get_the_time('d') . '</li>';
+        }elseif ( is_month() ) {
+            $html .= '<li class="breadcrumb-item" '.$li_atts.'><a href="' . esc_url( get_year_link( get_the_time( 'Y' ) ) ) . '" '.$li_a_atts.'>' . get_the_time( 'Y' ) . '</a></li>';
+            $html .= '<li class="breadcrumb-item active '.$li_atts.'">' . get_the_time( 'F' ) . '</li>';
+        }elseif ( is_year() ) {
+            $html .= '<li class="breadcrumb-item active" '.$li_atts.'>' . get_the_time( 'Y' ) . '</li>';
+        }elseif ( is_author() ) {
+            $html .= '<li class="breadcrumb-item active" '.$li_atts.'>' . get_the_author() . '</li>';
+        }elseif ( is_search() ) {
+            // do nothing
+        }elseif ( is_404() ) {
+            // do nothing
+        }
+    }
+    $html .= '</ol>';
+    echo $html;
+}
+
 /*------------------------------------*\
 	Theme support
 \*------------------------------------*/
