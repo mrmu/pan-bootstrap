@@ -31,17 +31,6 @@
 						</p>
 						<!-- /post details -->
 						<hr>
-						<p class="lead">
-							<!-- Your like button code -->
-							<div class="fb-like" 
-								data-href="<?php the_permalink();?>" 
-								data-width="" 
-								data-layout="button" 
-								data-action="like" 
-								data-size="small" 
-								data-share="false">
-							</div>
-						</p>
 						<!-- post thumbnail -->
 						<?php if ( has_post_thumbnail()) : // Check if Thumbnail exists ?>
 							<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
