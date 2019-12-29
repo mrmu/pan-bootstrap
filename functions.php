@@ -36,7 +36,7 @@ function custom_get_category_parents( $id, $position_length, $visited = array() 
 
 function bootstrap_breadcrumb() {
     global $post;
-    $home_txt = '<i class="fas fa-home"></i>';
+    $home_txt = __('Home', 'pan-bootstrap');
     $li_atts = 'itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"';
     $li_a_atts = 'itemprop="item" itemscope itemtype="https://schema.org/WebPage"';
     $item_wrap_s = '<span itemprop="name">';
