@@ -45,10 +45,10 @@ function bootstrap_breadcrumb() {
 
     $html = '<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">';
     if ( (is_front_page()) || (is_home()) ) {
-        $html .= '<li class="breadcrumb-item active" '.$li_a_atts.'>'.$home_txt.'</li>';
+        $html .= '<li class="breadcrumb-item active" '.$li_atts.'>'.$home_txt.'</li>';
     }else {
         $html .= 
-            '<li class="breadcrumb-item" '.$li_a_atts.'>'.
+            '<li class="breadcrumb-item" '.$li_atts.'>'.
                 '<a href="'.esc_url(home_url('/')).'" '.$li_a_atts.'>'.
                     $home_txt.
                 '</a>'.
