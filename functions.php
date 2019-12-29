@@ -23,7 +23,7 @@ function custom_get_category_parents( $id, $position_length, $visited = array() 
     }
     $chain .= 
         '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">'.
-            '<a href="' . esc_url( get_category_link( $parent->term_id ) ) . '" itemprop="item" itemscope itemtype="https://schema.org/WebPage">' . 
+            '<a href="' . esc_url( get_category_link( $parent->term_id ) ) . '" itemprop="item" itemscope itemtype="https://schema.org/WebPage" itemid="'.esc_url( get_category_link( $parent->term_id ) ).'">' . 
                 '<span itemprop="name">'.$name.'</span>'. 
             '</a>' . 
             '<meta itemprop="position" content="'.$position_length++.'" />'.
@@ -45,10 +45,10 @@ function bootstrap_breadcrumb() {
 
     $html = '<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">';
     if ( (is_front_page()) || (is_home()) ) {
-        $html .= '<li class="breadcrumb-item active">'.$home_txt.'</li>';
+        $html .= '<li class="breadcrumb-item active" '.$li_a_atts.'>'.$home_txt.'</li>';
     }else {
         $html .= 
-            '<li class="breadcrumb-item">'.
+            '<li class="breadcrumb-item" '.$li_a_atts.'>'.
                 '<a href="'.esc_url(home_url('/')).'" '.$li_a_atts.'>'.
                     $home_txt.
                 '</a>'.
