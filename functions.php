@@ -49,7 +49,7 @@ function bootstrap_breadcrumb() {
     }else {
         $html .= 
             '<li class="breadcrumb-item" '.$li_atts.'>'.
-                '<a href="'.esc_url(home_url('/')).'" '.$li_a_atts.' '.'itemid="'.esc_url(home_url('/')).'>'.
+                '<a href="'.esc_url(home_url('/')).'" '.$li_a_atts.' '.'itemid="'.esc_url(home_url('/')).'">'.
                     $item_wrap_s.$home_txt.$item_wrap_e.
                 '</a>'.
                 '<meta itemprop="position" content="'.$position_length++.'" />'.
