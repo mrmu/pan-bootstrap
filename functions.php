@@ -298,7 +298,18 @@ function pan_bootstrap_conditional_scripts()
             )
         );	
     }elseif (is_singular()) {
-		global $post;
+        global $post;
+        // Front-end
+        wp_register_script( 'd3-js', '//cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js', array(), '5.15.0', true );
+        wp_register_script( 'c3-js', '//cdnjs.cloudflare.com/ajax/libs/c3/0.7.11/c3.min.js', array('d3-js'), '0.7.11', true );
+        wp_register_style( 'c3-js-css', '//cdnjs.cloudflare.com/ajax/libs/c3/0.7.11/c3.min.css', array(), '0.7.11', 'all' );
+
+        if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'load-c3js') ) {
+            wp_enqueue_script( 'd3-js' );
+            wp_enqueue_script( 'c3-js' );
+            wp_enqueue_style( 'c3-js-css' );
+        }
+
         wp_register_script(
             'single_js', 
             get_template_directory_uri() . '/dist/single.min.js', 
@@ -394,7 +405,7 @@ function pan_bootstrap_styles() {
 			array(), 
 			filemtime( (dirname( __FILE__ )) . '/dist/archive.min.css' ),
 			'all'
-		);        
+		);
     }
 
 }
@@ -724,6 +735,28 @@ add_shortcode('pan_bootstrap_shortcode_demo_2', 'pan_bootstrap_shortcode_demo_2'
 
 // Shortcodes above would be nested like this -
 // [pan_bootstrap_shortcode_demo] [pan_bootstrap_shortcode_demo_2] Here's the page title! [/pan_bootstrap_shortcode_demo_2] [/pan_bootstrap_shortcode_demo]
+
+function pan_shortcode_load_c3js($atts) {
+
+    $atts = shortcode_atts( array(
+        'chart' => ''
+    ), $atts, 'load-c3js' );
+ 
+    if (!empty($atts['chart'])) {
+        $script_uri = get_template_directory_uri() . '/src/js/'.$atts['chart'].'-chart.js';
+        $script_dir = get_template_directory() . '/src/js/'.$atts['chart'].'-chart.js';
+        wp_enqueue_script( 
+            $atts['chart'].'_scripts', 
+            $script_uri,
+            array('c3-js', 'jquery'), 
+            filemtime( $script_dir ), 
+            true
+        );
+        return '<div id="'.$atts['chart'].'-chart"></div>';
+    }
+    return;
+}
+add_shortcode( 'load-c3js', 'pan_shortcode_load_c3js' );
 
 /*------------------------------------*\
 	Custom Post Types
