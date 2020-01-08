@@ -657,25 +657,6 @@ function pan_bootstrap_comments($comment, $args, $depth)
 	<?php endif; ?>
 <?php }
 
-// add Bootstrap 4 .img-fluid class to images inside post content
-function add_class_to_image_in_content($content) 
-{
-
-	$content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
-	$document = new DOMDocument();
-    libxml_use_internal_errors(true);
-    if (!empty($content)) {
-        $document->loadHTML(utf8_decode($content));
-
-        $imgs = $document->getElementsByTagName('img');
-        foreach ($imgs as $img) {           
-            $img->setAttribute('class','img-fluid');
-        }
-    }
-    $html = $document->saveHTML();
-	return $html;  	
-
-}
 
 /*------------------------------------*\
 	Actions + Filters + ShortCodes
@@ -723,8 +704,6 @@ add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
 add_filter('style_loader_tag', 'pan_bootstrap_style_remove'); // Remove 'text/css' from enqueued stylesheet
 add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
 add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
-// add .img-fluid class to images in the content
-add_filter('the_content', 'add_class_to_image_in_content');
 
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
