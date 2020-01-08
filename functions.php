@@ -525,7 +525,7 @@ function pan_bootstrap_pagination()
 // Custom Excerpts
 function pan_bootstrap_wp_index($length) // Create 20 Word Callback for Index page Excerpts, call using pan_bootstrap_excerpt('pan_bootstrap_index');
 {
-    return 580;
+    return 200;
 }
 
 // Create 40 Word Callback for Custom Post Excerpts, call using pan_bootstrap_excerpt('pan_bootstrap_custom_post');
