@@ -1,6 +1,5 @@
 // node's native package 'path'
 const path = require('path');
-const Fiber = require('fibers');
 const webpack = require('webpack'); // reference to webpack Object
 const TerserPlugin = require('terser-webpack-plugin'); // minify js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -119,7 +118,9 @@ module.exports = {
                         loader: "sass-loader",
                         options: {
                             implementation: require("sass"),
-                            fiber: Fiber
+                            sassOptions: {
+                                fiber: require('fibers'),
+                            },
                         }
                     }
                 ],
