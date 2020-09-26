@@ -1,6 +1,8 @@
 // import $ from "jquery";
-import "popper.js";
-import "bootstrap";
+// import "popper.js";
+// import "bootstrap";
+import 'bootstrap/dist/js/bootstrap.bundle'; //含 popper.js
+
 import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
 // import '@fortawesome/fontawesome-free/js/regular';

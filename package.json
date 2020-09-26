@@ -11,29 +11,28 @@
   "author": "audilu",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "babel-loader": "^8.1.0",
-    "css-loader": "^3.6.0",
+    "css-loader": "^4.3.0",
     "cssnano": "^4.1.10",
-    "file-loader": "^6.0.0",
-    "mini-css-extract-plugin": "^0.9.0",
-    "postcss-loader": "^3.0.0",
+    "file-loader": "^6.1.0",
+    "mini-css-extract-plugin": "^0.11.2",
+    "postcss": "^8.0.5",
+    "postcss-loader": "^4.0.2",
     "sass": "^1.26.10",
-    "sass-loader": "^9.0.2",
+    "sass-loader": "^10.0.2",
     "style-loader": "^1.2.1",
-    "terser-webpack-plugin": "^3.0.7",
+    "terser-webpack-plugin": "^4.2.1",
     "url-loader": "^4.1.0",
-    "webpack": "^4.43.0",
+    "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "autoprefixer": "^9.8.5",
-    "bootstrap": "^4.5.0",
+    "autoprefixer": "^10.0.0",
+    "bootstrap": "^4.5.2",
     "fibers": "^5.0.0",
-    "glob": "^7.1.6",
-    "highlight.js": "^10.1.1",
-    "popper.js": "^1.16.0"
+    "glob": "^7.1.6"
   }
 }

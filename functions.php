@@ -31,3 +31,6 @@ require_once PB_THEME_DIR . 'inc/theme/class-pb-theme-admin-general.php';
 
 /* Theme / Public */
 require_once PB_THEME_DIR . 'inc/theme/class-pb-theme-public-general.php';
+
+/* Plugins: WooCommerce */
+require_once PB_THEME_DIR . 'inc/plugins/class-pb-plugin-woocommerce.php';

@@ -1,8 +1,10 @@
-module.exports = ({ file, options, env }) => ({
-	parser: file.extname === '.sss' ? 'sugarss' : false,
-	plugins: {
-		'postcss-import': { root: file.dirname },
-		'postcss-preset-env': options['postcss-preset-env'] ? options['postcss-preset-env'] : false,
-		'cssnano': env === 'production' ? options.cssnano : false
-	}
-})
+module.exports = {
+	plugins: [
+		// autoprefixer 會自動增加css前綴，如: -webkit-
+		'autoprefixer',
+		//'postcss-import',
+		//'postcss-preset-env',
+		// cssnano: 最佳化及minify css
+		['cssnano', { preset: 'default' }]
+	]
+};

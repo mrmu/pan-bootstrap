@@ -4,16 +4,16 @@ if (have_posts()):
 	while (have_posts()) : 
 	the_post();
 
-	$p_s_post_excerpt = wp_html_excerpt($post->post_content, 120, '...');
+	$p_s_post_excerpt = wp_html_excerpt($post->post_content, 80, '...');
 	$p_img = pb_get_post_thumbnail($post->ID, 'large');
 	?>
 
-	<div class="col-12 col-lg-4">
+	<div class="col-12 col-lg-6">
 		<article id="post-<?php the_ID(); ?>" <?php post_class('mt-5'); ?>>
 			<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-				<div class="img_wrap">
+				<figure style="display: block; height: 190px; overflow: hidden; margin: 0;">
 					<img src="<?php echo $p_img; ?>" class="img-fluid" alt="<?php the_title(); ?>"/>
-				</div>
+				</figure>
 				<h2 class="title word-break mt-2 mb-2"><?php the_title(); ?></h2>
 				<?php if ($post->post_type !== 'product'): ?>
 				<p>

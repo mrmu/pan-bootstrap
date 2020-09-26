@@ -23,7 +23,7 @@ get_header(); ?>
 						<?php get_template_part('loop'); ?>
 						<?php get_template_part('pagination'); ?>
 					</section>
-				</div><!-- /.col-md-8 -->
+				</div><!-- /.col-lg-8 -->
 				<?php get_sidebar(); ?>
 			</div><!-- /.row -->
 		</div><!-- /.container -->
