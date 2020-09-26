@@ -15,6 +15,11 @@
 
 	</head>
 	<body <?php body_class(); ?>>
+		<?php
+		if ( function_exists( 'wp_body_open' ) ) {
+			wp_body_open();
+		}
+		?>
 		<!-- header -->
 		<header class="header main-header clear">
 			<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
@@ -26,7 +31,9 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<?php pan_bootstrap_nav(); ?>
+						<ul id="menu-main-menu" class="navbar-nav ml-auto">
+							<?php pan_bootstrap_nav(); ?>
+						</ul>
 					</div>
 				</div>
 				<!-- /.container -->

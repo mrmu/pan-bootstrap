@@ -1,56 +1,40 @@
 <?php
 /**
- * The template for displaying Comments.
+ * The template for displaying comments.
  *
- * The area of the page that contains both current comments
- * and the comment form. The actual display of comments is
- * handled by a callback to starkers_comment() which is
- * located in the functions.php file.
+ * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package 	WordPress
- * @subpackage 	Bootstrap 4.4.1
- * @autor 		Babobski
+ * @package Pan-Bootstrap
+ * @since 0.1.0
  */
-?>
-<div id="comments">
-	<?php if ( post_password_required() ) : ?>
-	<p>
-		This post is password protected. Enter the password to view any comments
-	</p>
-</div>
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+if ( post_password_required() ) :?>
+	<div id="comments">
+		<p>
+			<?php _e('This post is password protected. Enter the password to view any comments', 'pan-bootstrap'); ?>
+		</p>
+	</div>
 	<?php
-			/* Stop the rest of comments.php from being processed,
-			 * but don't kill the script entirely -- we still have
-			 * to fully load the template.
-			 */
-			return;
-		endif;
-	?>
+	return;
+endif;
+?>
 
-	<?php // You can start editing here -- including this comment! ?>
-
+<div id="comments">
 	<?php if ( have_comments() ) : ?>
-
 		<h2>
 			<?php comments_number(); ?>
 		</h2>
-	
 		<ul class="media-list">
 			<?php wp_list_comments( array( 'callback' => 'pan_bootstrap_comments' ) ); ?>
 		</ul>
-	
-	<?php
-		/* If there are no comments and comments are closed, let's leave a little note, shall we?
-		 * But we don't want the note on pages or post types that do not support comments.
-		 */
-		elseif ( ! comments_open() && ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) :
-	?>
-		
+	<?php elseif ( !comments_open() && !is_page() &&  post_type_supports( get_post_type(), 'comments' ) ): ?>
 		<p>
 			<?php echo __('Comments are closed', 'pan-bootstrap')?>
 		</p>
-	
 	<?php endif; ?>
 
 	<?php
@@ -67,22 +51,35 @@
 	$comments_arg = array(
 		'form'	=> array(
 			'class' => 'form-horizontal'
-			),
-		'fields' => apply_filters( 'comment_form_default_fields', array(
-				'autor' 				=> '<div class="form-group">' . '<label for="author">' . __( 'Name', 'pan-bootstrap' ) . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
-										'<input id="author" name="author" class="form-control" type="text" value="" size="30"' . $aria_req . ' />'.
-										'<p id="d1" class="text-danger"></p>' . '</div>',
-				'email'					=> '<div class="form-group">' .'<label for="email">' . __( 'Email', 'pan-bootstrap' ) . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
-										'<input id="email" name="email" class="form-control" type="text" value="" size="30"' . $aria_req . ' />'.
-										'<p id="d2" class="text-danger"></p>' . '</div>',
-				'url'					=> '')),
-				'comment_field'			=> '<div class="form-group">' . '<label for="comment">' . __( 'Comment', 'pan-bootstrap' ) . '</label><span>*</span>' .
-										'<textarea id="comment" class="form-control" name="comment" rows="3" aria-required="true"></textarea><p id="d3" class="text-danger"></p>' . '</div>',
-				'comment_notes_after' 	=> '',
-				'class_submit'			=> 'btn btn-primary'
-			); ?>
-	<?php comment_form($comments_arg);
+		),
+		'fields' => apply_filters( 
+			'comment_form_default_fields', array(
+				'autor' => 
+					'<div class="form-group">' . 
+						'<label for="author">' . __( 'Name', 'pan-bootstrap' ) . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
+						'<input id="author" name="author" class="form-control" type="text" value="" size="30"' . $aria_req . ' />'.
+						'<p id="d1" class="text-danger"></p>' . 
+					'</div>',
+				'email' => 
+					'<div class="form-group">' .
+						'<label for="email">' . __( 'Email', 'pan-bootstrap' ) . '</label> ' . ( $req ? '<span>*</span>' : '' ) .
+						'<input id="email" name="email" class="form-control" type="text" value="" size="30"' . $aria_req . ' />'.
+						'<p id="d2" class="text-danger"></p>' . 
+					'</div>',
+				'url' => ''
+			)
+		),
+		'comment_field' => 
+			'<div class="form-group">' . 
+				'<label for="comment">' . __( 'Comment', 'pan-bootstrap' ) . '</label><span>*</span>' .
+				'<textarea id="comment" class="form-control" name="comment" rows="3" aria-required="true"></textarea>'.
+				'<p id="d3" class="text-danger"></p>' . 
+			'</div>',
+		'comment_notes_after' => '',
+		'class_submit' => 'btn btn-primary'
+	); 
+	comment_form($comments_arg);
 	echo str_replace('class="comment-form"','class="comment-form" name="commentForm"',ob_get_clean());
 	?>	
-
 </div>
+<!--#comments-->

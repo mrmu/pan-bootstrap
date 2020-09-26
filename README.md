@@ -66,7 +66,10 @@ npm run build
   * home.js：除了 import jquery, bootstrap外，還 import plugin_a 和 plugin_b 這兩個自訂的 .js，其中一個是有 export function 出來，表示 home 這頁可以載入一些不一樣的 js。最後 import 了 /src/sass/home.scss，它的內容與 style.scss 也不同，表示 home 也載入了不同的 css 設定。
 2. 查看 wp-themes/pan-bootstrap/functions.php，其中 pan_bootstrap_styles() 裡定義了在首頁才 wp enqueue home的 assets，如此就實現不同 template 載入不同 assets。
 
+## Hooks
+1. pb_load_wc_assets_or_not : 如果有使用 WooCommerce，預設佈景會將非 WC 頁面的 wc assets (js/css) 停止載入，如果有特定頁面需要使用 WC styles 或 JS 功能如 blockUI，可以用此 hook 開啟。
+
 ## Memo
 
 1. <del>安裝 npm 套件會發現 node-sass 使用到 tar 這個套件版本有問題，目前尚未解決，work around 在：https://github.com/sass/node-sass/issues/2625#issuecomment-482224111</del> 已將 node-sass 換成 dart-sass
-2. extract-text-webpack-plugin 4.0 beta replace to mini-css-extract-plugin.
+1. extract-text-webpack-plugin 4.0 beta replace to mini-css-extract-plugin.

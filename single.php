@@ -27,7 +27,7 @@
 							<span class="comments"><?php if (comments_open( get_the_ID() ) ) comments_popup_link( __( 'Leave your thoughts', 'pan-bootstrap' ), __( '1 Comment', 'pan-bootstrap' ), __( '% Comments', 'pan-bootstrap' )); ?></span>
 						</p>
 						<!-- /post details -->
-						<?php bootstrap_breadcrumb(); ?>
+						<?php pb_breadcrumb(); ?>
 						<hr>
 						<div class="container">
 							<div class="row">

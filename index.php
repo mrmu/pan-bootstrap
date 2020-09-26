@@ -1,5 +1,18 @@
-<?php get_header(); ?>
-<!-- wrapper -->
+<?php
+/**
+ * The main template file.
+ * 
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package Pan-Bootstrap
+ * @since 0.1.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+get_header(); ?>
+
 <div class="wrapper">
 	<main>
 		<div class="container">
@@ -17,4 +30,5 @@
 		</div><!-- /.container -->
 	</main>
 </div>
+
 <?php get_footer(); ?>
