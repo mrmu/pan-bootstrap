@@ -16,16 +16,6 @@
 						<h1 class="post_title"><?php the_title(); ?></h1>
 						<!-- /post title -->
 						<hr>
-						<!-- Date -->
-						<p>
-							<span class="author"><?php _e( 'Published by', 'pan-bootstrap' ); ?> <?php the_author_posts_link(); ?></span>
-							<span class="text-muted">|</span>
-							<span class="date">
-								<?php the_time('Y/m/d'); ?> <?php the_time('H:i:s'); ?>
-							</span>
-							<span class="text-muted">|</span>
-							<span class="comments"><?php if (comments_open( get_the_ID() ) ) comments_popup_link( __( 'Leave your thoughts', 'pan-bootstrap' ), __( '1 Comment', 'pan-bootstrap' ), __( '% Comments', 'pan-bootstrap' )); ?></span>
-						</p>
 						<!-- /post details -->
 						<?php pb_breadcrumb(); ?>
 						<hr>
@@ -43,15 +33,6 @@
 
 									<?php the_content(); // Dynamic Content ?>
 									<hr>
-									<p>
-										<?php the_tags( __( 'Tags: ', 'pan-bootstrap' ), ', ', '<br>'); // Separated by commas with a line break at the end ?>
-									</p>
-
-									<p>
-										<?php _e( 'Categorised in: ', 'pan-bootstrap' ); the_category(', '); // Separated by commas ?>
-									</p>
-
-									<p class="text-muted"><?php _e( 'This post was written by ', 'pan-bootstrap' ); the_author(); ?></p>
 
 									<?php edit_post_link(); // Always handy to have Edit Post Links available ?>
 

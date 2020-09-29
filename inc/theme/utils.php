@@ -201,9 +201,15 @@ if ( ! function_exists( 'pb_get_post_thumbnail' ) ) {
 			$obj_header_img = wp_get_attachment_image_src( $header_image_id, 'full' );
 			return $obj_header_img[0];
 		}
-		
+
+		// 設定預設佔位圖，如：get_template_directory_uri().'/images/def_thumbnail.jpg'
+		$def_thumbnail = apply_filters( 'pb_default_thumbnail', '');
+		if (empty($def_thumbnail)) {
+			$def_thumbnail = 'https://placehold.it/1200x628';
+		}
+
 		// 佈景預設 banner 圖
-		return get_bloginfo('stylesheet_directory').'/images/big_banner.jpg';
+		return $def_thumbnail;
 	}
 }
 

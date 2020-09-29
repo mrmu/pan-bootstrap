@@ -24,7 +24,7 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
 		}
 
 		public function __construct() {
-            $this->gtm_id = 'GTM-xxxxxxx';
+            $this->gtm_id = ''; //GTM-xxxxxxx
 
             add_action( 'init', array($this, 'reg_shortcodes'));
             // add_action( 'wp', array($this, 'move_jquery_to_footer'), 99); 
@@ -67,8 +67,8 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
         
         public function public_enqueue_scripts() 
         {
-            $src_dir = PB_THEME_DIR . '/src';
-            $dist_dir = PB_THEME_DIR . '/dist';
+            $src_dir = PB_THEME_DIR . 'src/';
+            $dist_dir = PB_THEME_DIR . 'dist/';
         
             $site_lang = substr(strtolower(get_locale()), 0, 2); //site lang
 
@@ -76,9 +76,9 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
             if (is_home() || is_front_page()) {
                 wp_register_script(
                     'home_js', 
-                    PB_THEME_URI . '/dist/home.min.js', 
+                    PB_THEME_URI . 'dist/home.min.js', 
                     array('jquery'), 
-                    filemtime( $dist_dir . '/home.min.js' ),
+                    filemtime( $dist_dir . 'home.min.js' ),
                     true
                 );
                 wp_enqueue_script('home_js');
@@ -94,9 +94,9 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
 
                 wp_register_script(
                     'single_js', 
-                    PB_THEME_URI . '/dist/single.min.js', 
+                    PB_THEME_URI . 'dist/single.min.js', 
                     array('jquery'), 
-                    filemtime( $dist_dir . '/single.min.js' ),
+                    filemtime( $dist_dir . 'single.min.js' ),
                     true
                 );
                 wp_enqueue_script('single_js');
@@ -115,9 +115,9 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
             }elseif (is_search() || is_archive()) {
                 wp_register_script(
                     'archive_js', 
-                    PB_THEME_URI . '/dist/archive.min.js', 
+                    PB_THEME_URI . 'dist/archive.min.js', 
                     array('jquery'), 
-                    filemtime( $dist_dir . '/archive.min.js' ),
+                    filemtime( $dist_dir . 'archive.min.js' ),
                     true
                 ); 
                 wp_enqueue_script('archive_js');
@@ -132,9 +132,9 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
             }else{
                 wp_register_script(
                     'archive_js', 
-                    PB_THEME_URI . '/dist/archive.min.js', 
+                    PB_THEME_URI . 'dist/archive.min.js', 
                     array('jquery'), 
-                    filemtime( $dist_dir . '/archive.min.js' ),
+                    filemtime( $dist_dir . 'archive.min.js' ),
                     true
                 ); 
                 wp_enqueue_script('archive_js');
@@ -151,7 +151,7 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
         
         public function public_enqueue_styles() {
         
-            $dist_dir = PB_THEME_DIR . '/dist';
+            $dist_dir = PB_THEME_DIR . 'dist/';
         
             if (!is_admin()) {
                 wp_dequeue_style( 'wp-block-library' );
@@ -160,33 +160,33 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
             if (is_home() || is_front_page()) {
                 wp_enqueue_style( 
                     'home_styles', 
-                    PB_THEME_URI . '/dist/home.min.css', 
+                    PB_THEME_URI . 'dist/home.min.css', 
                     array(), 
-                    filemtime( $dist_dir . '/home.min.css' ),
+                    filemtime( $dist_dir . 'home.min.css' ),
                     'all'
                 );
             }elseif (is_singular()) {
                 wp_enqueue_style( 
                     'single_styles', 
-                    PB_THEME_URI . '/dist/single.min.css', 
+                    PB_THEME_URI . 'dist/single.min.css', 
                     array(), 
-                    filemtime( $dist_dir . '/single.min.css' ),
+                    filemtime( $dist_dir . 'single.min.css' ),
                     'all'
                 );
             }elseif (is_search() || is_archive()) {
                 wp_enqueue_style( 
                     'archive_styles', 
-                    PB_THEME_URI . '/dist/archive.min.css', 
+                    PB_THEME_URI . 'dist/archive.min.css', 
                     array(), 
-                    filemtime( $dist_dir . '/archive.min.css' ),
+                    filemtime( $dist_dir . 'archive.min.css' ),
                     'all'
                 );
             }else{
                 wp_enqueue_style( 
                     'archive_styles', 
-                    PB_THEME_URI . '/dist/archive.min.css', 
+                    PB_THEME_URI . 'dist/archive.min.css', 
                     array(), 
-                    filemtime( $dist_dir . '/archive.min.css' ),
+                    filemtime( $dist_dir . 'archive.min.css' ),
                     'all'
                 );
             }
@@ -199,6 +199,7 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
 
         // GTM code
         public function embed_gtm_code_head() {
+            if (!empty($this->gtm_id)) {
             ?>
             <!-- Google Tag Manager -->
             <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -208,14 +209,17 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
             })(window,document,'script','dataLayer','<?php echo $this->get_gtm_id();?>');</script>
             <!-- End Google Tag Manager -->
             <?php
+            }
         }
         public function embed_gtm_code_body() {
+            if (!empty($this->gtm_id)) {
             ?>
             <!-- Google Tag Manager (noscript) -->
             <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $this->get_gtm_id();?>"
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- End Google Tag Manager (noscript) -->
             <?php
+            }
         }        
     }
 }
