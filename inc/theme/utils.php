@@ -22,25 +22,26 @@ if ( ! function_exists( 'pan_bootstrap_nav' ) ) {
 		$search_form = get_search_form( false ); // Return not echo
 
 		wp_nav_menu(
-		array(
-			'theme_location'  => 'primary-menu',
-			'menu'            => '',
-			'container'       => 'div',
-			'container_class' => 'collapse navbar-collapse',
-			'container_id'    => 'bs-example-navbar-collapse-1',
-			'items_wrap'      => '%3$s',
-			'menu_class'      => 'navbar-nav ml-auto',
-			'menu_id'         => '',
-			'echo'            => true,
-			'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-			'before'          => '',
-			'after'           => '',
-			'link_before'     => '',
-			'link_after'      => '',
-			'depth'           => 4,
-			'walker'          => new WP_Bootstrap_Navwalker()
+			array(
+				'theme_location'  => 'primary-menu',
+				'menu'            => '',
+				'container'       => 'div',
+				'container_class' => 'collapse navbar-collapse',
+				'container_id'    => 'bs-example-navbar-collapse-1',
+				'items_wrap'      => '%3$s',
+				'menu_class'      => 'navbar-nav ml-auto',
+				'menu_id'         => '',
+				'echo'            => true,
+				'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+				'before'          => '',
+				'after'           => '',
+				'link_before'     => '',
+				'link_after'      => '',
+				'depth'           => 4,
+				'walker'          => new WP_Bootstrap_Navwalker()
 			)
 		);
+
 	}
 }
 
@@ -475,7 +476,7 @@ if ( ! function_exists( 'pb_breadcrumb' ) ) {
 				$html .= '<li class="breadcrumb-item active" '.$li_atts.'> Search </li>';
 			}elseif ( is_404() ) {
 				$html .= '<li class="breadcrumb-item active" '.$li_atts.'> 404 </li>';
-			}elseif (is_woocommerce()){
+			}elseif ( function_exists(is_woocommerce()) && is_woocommerce() ){
 				$breadcrumbs = new WC_Breadcrumb();
 				$breadcrumb = $breadcrumbs->generate();
 
