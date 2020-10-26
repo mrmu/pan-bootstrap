@@ -239,7 +239,9 @@ if ( ! class_exists( 'PB_Theme_Setup' ) ) {
 
         public function manage_woocommerce_styles() {
             //remove generator meta tag
-            remove_action( 'wp_head', array( $GLOBALS['woocommerce'], 'generator' ) );
+            if (isset($GLOBALS['woocommerce'])) {
+                remove_action( 'wp_head', array( $GLOBALS['woocommerce'], 'generator' ) );
+            }
 
             //first check that woo exists to prevent fatal errors
             if ( function_exists( 'is_woocommerce' ) ) {

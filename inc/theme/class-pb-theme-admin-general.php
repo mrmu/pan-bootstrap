@@ -24,8 +24,8 @@ if ( ! class_exists( 'PB_Theme_Admin_General' ) ) {
 
 		public function __construct() {
             // custom post types
-            add_action( 'init', array($this, 'reg_custom_post_types', 10 ));
-            add_action( 'init', array($this, 'reg_custom_taxonomy', 10 ));
+            add_action( 'init', array($this, 'reg_custom_post_types'), 10 );
+            add_action( 'init', array($this, 'reg_custom_taxonomy'), 10 );
 
             // enqueue styles & scripts
             add_action( 'admin_enqueue_scripts', array($this, 'admin_enqueue_styles' ));

@@ -23,8 +23,8 @@ if ( ! class_exists( 'PB_Plugin_WooCommerce' ) ) {
 		}
 
 		public function __construct() {            
-            add_action( 'after_setup_theme', 'woocommerce_support' );
-            add_action('admin_head', 'pb_wc_admin_page_style');
+            add_action( 'after_setup_theme', array($this, 'woocommerce_support') );
+            add_action( 'admin_head', array($this, 'pb_wc_admin_page_style') );
         }
 
         public function woocommerce_support() {
