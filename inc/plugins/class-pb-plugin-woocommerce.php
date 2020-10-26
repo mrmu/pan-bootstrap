@@ -23,11 +23,17 @@ if ( ! class_exists( 'PB_Plugin_WooCommerce' ) ) {
 		}
 
 		public function __construct() {            
+<<<<<<< HEAD
             add_action( 'after_setup_theme', array($this, 'woocommerce_support') );
             add_action( 'admin_head', array($this, 'pb_wc_admin_page_style') );
+=======
+            add_action( 'after_setup_theme', array($this, 'add_wc_support') );
+            // woocommerce admin header 會蓋住上方頁面標題
+            // add_action( 'admin_head', array($this, 'fix_wc_admin_page_style') );
+>>>>>>> d82fdd2bd0247d29437178cad21c1ddb3ca18a59
         }
 
-        public function woocommerce_support() {
+        public function add_wc_support() {
             add_theme_support( 'woocommerce' );
     
             // Add New Woocommerce 3.0.0 Product Gallery support.
@@ -106,6 +112,10 @@ if ( ! class_exists( 'PB_Plugin_WooCommerce' ) ) {
                     break;
             } // end switch ($args).
             return $args;
+        }
+
+        public function fix_wc_admin_page_style() {
+            echo '<style>.woocommerce-embed-page .wrap{margin-top: 50px;}</style>';
         }
     }
 }

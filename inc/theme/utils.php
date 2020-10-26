@@ -22,25 +22,26 @@ if ( ! function_exists( 'pan_bootstrap_nav' ) ) {
 		$search_form = get_search_form( false ); // Return not echo
 
 		wp_nav_menu(
-		array(
-			'theme_location'  => 'primary-menu',
-			'menu'            => '',
-			'container'       => 'div',
-			'container_class' => 'collapse navbar-collapse',
-			'container_id'    => 'bs-example-navbar-collapse-1',
-			'items_wrap'      => '%3$s',
-			'menu_class'      => 'navbar-nav ml-auto',
-			'menu_id'         => '',
-			'echo'            => true,
-			'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-			'before'          => '',
-			'after'           => '',
-			'link_before'     => '',
-			'link_after'      => '',
-			'depth'           => 4,
-			'walker'          => new WP_Bootstrap_Navwalker()
+			array(
+				'theme_location'  => 'primary-menu',
+				'menu'            => '',
+				'container'       => 'div',
+				'container_class' => 'collapse navbar-collapse',
+				'container_id'    => 'bs-example-navbar-collapse-1',
+				'items_wrap'      => '%3$s',
+				'menu_class'      => 'navbar-nav ml-auto',
+				'menu_id'         => '',
+				'echo'            => true,
+				'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+				'before'          => '',
+				'after'           => '',
+				'link_before'     => '',
+				'link_after'      => '',
+				'depth'           => 4,
+				'walker'          => new WP_Bootstrap_Navwalker()
 			)
 		);
+
 	}
 }
 
@@ -201,9 +202,15 @@ if ( ! function_exists( 'pb_get_post_thumbnail' ) ) {
 			$obj_header_img = wp_get_attachment_image_src( $header_image_id, 'full' );
 			return $obj_header_img[0];
 		}
-		
+
+		// 設定預設佔位圖，如：get_template_directory_uri().'/images/def_thumbnail.jpg'
+		$def_thumbnail = apply_filters( 'pb_default_thumbnail', '');
+		if (empty($def_thumbnail)) {
+			$def_thumbnail = 'https://placehold.it/1200x628';
+		}
+
 		// 佈景預設 banner 圖
-		return get_bloginfo('stylesheet_directory').'/images/big_banner.jpg';
+		return $def_thumbnail;
 	}
 }
 
@@ -469,7 +476,7 @@ if ( ! function_exists( 'pb_breadcrumb' ) ) {
 				$html .= '<li class="breadcrumb-item active" '.$li_atts.'> Search </li>';
 			}elseif ( is_404() ) {
 				$html .= '<li class="breadcrumb-item active" '.$li_atts.'> 404 </li>';
-			}elseif (is_woocommerce()){
+			}elseif ( function_exists(is_woocommerce()) && is_woocommerce() ){
 				$breadcrumbs = new WC_Breadcrumb();
 				$breadcrumb = $breadcrumbs->generate();
 
