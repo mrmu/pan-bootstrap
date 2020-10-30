@@ -476,7 +476,7 @@ if ( ! function_exists( 'pb_breadcrumb' ) ) {
 				$html .= '<li class="breadcrumb-item active" '.$li_atts.'> Search </li>';
 			}elseif ( is_404() ) {
 				$html .= '<li class="breadcrumb-item active" '.$li_atts.'> 404 </li>';
-			}elseif ( function_exists(is_woocommerce()) && is_woocommerce() ){
+			}elseif ( function_exists('is_woocommerce') && is_woocommerce() ){
 				$breadcrumbs = new WC_Breadcrumb();
 				$breadcrumb = $breadcrumbs->generate();
 

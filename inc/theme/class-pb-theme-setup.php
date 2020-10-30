@@ -325,19 +325,17 @@ if ( ! class_exists( 'PB_Theme_Setup' ) ) {
         // 前台搜尋支援的 post types
         public function frontend_search_filter($query) {
             if (!is_admin()) {
-                $support_post_types = array('post', 'product', 'case', 'tpost');
-                if ($query->is_search) {
-                    if (!is_admin()) {
-                        $query->set('posts_per_page', 12);
-                        $query->set('post_type', $support_post_types);
-                        $sort = (isset($_GET['sort_search']))? sanitize_text_field( $_GET['sort_search'] ):'by_time';
-                        if ($sort === 'by_sales') {
-                            $query->set('meta_key', 'total_sales');
-                            $query->set('orderby', 'meta_value');
-                            $query->set('order', 'DESC');
-                        }
-                    }
-                }
+                // $support_post_types = array('post', 'product');
+                // if ($query->is_search) {
+                //     $query->set('posts_per_page', 12);
+                //     $query->set('post_type', $support_post_types);
+                //     $sort = (isset($_GET['sort_search']))? sanitize_text_field( $_GET['sort_search'] ):'by_time';
+                //     if ($sort === 'by_sales') {
+                //         $query->set('meta_key', 'total_sales');
+                //         $query->set('orderby', 'meta_value');
+                //         $query->set('order', 'DESC');
+                //     }
+                // }
             }
         }
     }
