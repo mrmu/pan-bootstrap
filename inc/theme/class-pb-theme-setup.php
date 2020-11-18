@@ -47,8 +47,8 @@ if ( ! class_exists( 'PB_Theme_Setup' ) ) {
             // Custom Gravatar in Settings > Discussion
             add_filter( 'avatar_defaults', array( $this, 'add_custom_gravatar') );
 
-            // Remove Admin bar
-            add_filter( 'show_admin_bar', '__return_false' );
+            // // Remove Admin bar
+            // add_filter( 'show_admin_bar', '__return_false' );
 
             // Remove invalid rel attribute
             add_filter( 'the_category', array( $this, 'remove_category_rel_from_category_list') ); 
