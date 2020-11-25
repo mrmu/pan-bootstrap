@@ -220,6 +220,7 @@ if ( ! function_exists( 'pb_get_post_thumbnail' ) ) {
 if ( ! function_exists( 'pb_get_metas' ) ) {
 	function pb_get_metas() {
 		global $post;
+		$site_name = get_bloginfo('sitename');
 		$obj_data = get_queried_object();
 		// print_r($obj_data);
 		$default_img_urls = array(
@@ -235,27 +236,27 @@ if ( ! function_exists( 'pb_get_metas' ) ) {
 			'images' => $default_img_urls
 		);
 
-		if ( is_tax()) { 
-			$metas['title'] = ''.$obj_data->name.''; 
-			$metas['type'] = 'object';
-			$metas['desc'] = $metas['title'].'，'.$metas['desc'];
-			$metas['url'] = get_term_link($obj_data->term_id);
-		}
-		elseif (is_author()) {
-			$metas['title'] = $obj_data->data->display_name; 
+		if (is_author()) {
+			$metas['title'] = $obj_data->data->display_name.' - '.$site_name; 
 			$metas['type'] = 'object';
 			$metas['desc'] = $metas['title'].'，'.$metas['desc'];
 			$metas['url'] = get_author_posts_url($obj_data->data->ID);
 		}
 		elseif (is_search()) { 
 			$s = get_query_var('s');
-			$metas['title'] =  'Search for &quot;'.esc_html($s).'&quot;'; 
+			$metas['title'] =  'Search for &quot;'.esc_html($s).'&quot;'.' - '.$site_name; ; 
 		} 
 		elseif (is_404()) {
 			$metas['title'] = 'Sorry, no data for you.'; 
 		}
 		elseif (is_home() || is_front_page()) {
 			// default meta
+		}
+		elseif ( is_archive()) { 
+			$metas['title'] = ''.$obj_data->name.' - '.$site_name; 
+			$metas['type'] = 'object';
+			$metas['desc'] = $metas['title'].'，'.$metas['desc'];
+			$metas['url'] = get_term_link($obj_data->term_id);
 		}
 		elseif ((is_single()) || (is_page())) { 
 			$meta_imgs = array();
@@ -269,7 +270,7 @@ if ( ! function_exists( 'pb_get_metas' ) ) {
 			}
 		
 			// title / desc / url
-			$metas['title'] = $post_title; 
+			$metas['title'] = $post_title.' - '.$site_name; ; 
 			$metas['desc'] = $post_excerpt;
 			$metas['url'] = get_permalink($post_id);
 

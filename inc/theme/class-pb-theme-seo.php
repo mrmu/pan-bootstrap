@@ -25,7 +25,8 @@ if ( ! class_exists( 'PB_Theme_SEO' ) ) {
 		public function __construct() {
 			add_action( 'after_setup_theme', array($this, 'add_theme_title_tag') );
 			add_filter( 'document_title_parts', array($this, 'custom_doc_title', 10) );
-			add_action( 'wp_head', array($this, 'insert_meta_in_head', 5) );
+			remove_action( 'wp_head', '_wp_render_title_tag', 1 ); // remove default title tag
+			add_action( 'wp_head', array($this, 'insert_meta_in_head'), 5 );
         }
 
 		// Let WordPress manage the document title.
@@ -61,7 +62,8 @@ if ( ! class_exists( 'PB_Theme_SEO' ) ) {
 
 		public function insert_meta_in_head() {
 			$metas = pb_get_metas();
-
+			$metas['desc'] = preg_replace('/\s+/', ' ', $metas['desc']);
+			echo '<title>'.$metas['title'].'</title>'."\r\n";
 			// Meta Tags
 			echo '<meta name="description" content="'.$metas['desc'].'"/>'."\n";
 			echo '<link rel="canonical" href="'.$metas['url'].'" />'."\n";

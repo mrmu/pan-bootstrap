@@ -2,8 +2,6 @@
 <html <?php language_attributes(); ?> class="no-js">
 	<head>
 		<meta charset="<?php bloginfo('charset'); ?>">
-		<title><?php wp_title(''); ?></title>
-
 		<link href="//www.google-analytics.com" rel="dns-prefetch">
 		<link href="<?php echo get_template_directory_uri(); ?>/logo.png" rel="shortcut icon">
 		<link href="<?php echo get_template_directory_uri(); ?>/logo.png" rel="apple-touch-icon-precomposed">

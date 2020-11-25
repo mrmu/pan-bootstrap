@@ -23,6 +23,7 @@ require_once PB_THEME_DIR . 'inc/theme/class-pb-theme-setup.php';
 require_once PB_THEME_DIR . 'inc/theme/class-pb-theme-customizer.php';
 require_once PB_THEME_DIR . 'inc/theme/class-pb-theme-menu.php';
 require_once PB_THEME_DIR . 'inc/theme/class-pb-theme-widgets.php';
+require_once PB_THEME_DIR . 'inc/theme/class-pb-theme-seo.php';
 require_once PB_THEME_DIR . 'inc/theme/class-wp-bootstrap-navwalker.php';
 require_once PB_THEME_DIR . 'inc/theme/utils.php';
 
