@@ -250,7 +250,10 @@ if ( ! function_exists( 'pb_get_metas' ) ) {
 			$metas['title'] = 'Sorry, no data for you.'; 
 		}
 		elseif (is_home() || is_front_page()) {
-			// default meta
+			if (!empty($meta['desc'])) {
+				$desc = ' - '.$metas['desc'];
+			}		
+			$metas['title'] = $metas['title'].$desc; 
 		}
 		elseif ( is_archive()) { 
 			$metas['title'] = ''.$obj_data->name.' - '.$site_name; 
