@@ -224,8 +224,8 @@ if ( ! function_exists( 'pb_get_metas' ) ) {
 		$obj_data = get_queried_object();
 		// print_r($obj_data);
 		$default_img_urls = array(
-			get_template_directory_uri().'/images/sanav_banner1.jpg',
-			get_template_directory_uri().'/images/sanav_banner2.jpg'
+			get_template_directory_uri().'/images/banner1.jpg',
+			get_template_directory_uri().'/images/banner2.jpg'
 		);
 
 		$metas = array(
