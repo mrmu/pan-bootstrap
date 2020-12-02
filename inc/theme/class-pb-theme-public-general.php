@@ -152,11 +152,7 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
         public function public_enqueue_styles() {
         
             $dist_dir = PB_THEME_DIR . 'dist/';
-        
-            if (!is_admin()) {
-                wp_dequeue_style( 'wp-block-library' );
-            }
-        
+
             if (is_home() || is_front_page()) {
                 wp_enqueue_style( 
                     'home_styles', 
