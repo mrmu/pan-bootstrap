@@ -255,11 +255,13 @@ if ( ! function_exists( 'pb_get_metas' ) ) {
 			}		
 			$metas['title'] = $metas['title'].$desc; 
 		}
-		elseif ( is_archive()) { 
+		elseif ( is_archive() && !empty($obj_data)) { 
 			$metas['title'] = ''.$obj_data->name.' - '.$site_name; 
 			$metas['type'] = 'object';
 			$metas['desc'] = $metas['title'].'，'.$metas['desc'];
-			$metas['url'] = get_term_link($obj_data->term_id);
+			if (!empty($obj_data->term_id)) {
+				$metas['url'] = get_term_link($obj_data->term_id);
+			}
 		}
 		elseif ((is_single()) || (is_page())) { 
 			$meta_imgs = array();
