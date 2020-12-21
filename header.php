@@ -23,7 +23,17 @@
 			<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
 				<div class="container">
 					<a class="navbar-brand" href="<?php echo home_url(); ?>">
-						<?php bloginfo('name'); ?>
+						<div class="logo_wrap">
+							<?php
+							$custom_logo_id = get_theme_mod( 'custom_logo' );
+							$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+							if ( has_custom_logo() ) {
+									echo '<img src="' . esc_url( $logo ) . '" alt="' . get_bloginfo( 'name' ) . '">';
+							} else {
+									echo '<h1>'. get_bloginfo( 'name' ) .'</h1>';
+							}
+							?>
+						</div>
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
