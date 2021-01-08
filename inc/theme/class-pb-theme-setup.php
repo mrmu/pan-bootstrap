@@ -65,8 +65,8 @@ if ( ! class_exists( 'PB_Theme_Setup' ) ) {
             add_filter( 'style_loader_tag', array( $this, 'style_remove'), 10 );
 
             // Remove WooCommerce Generator tag, styles, and scripts from non WooCommerce pages.
-            add_action( 'get_header', array( $this, 'conditionally_remove_wc_assets') );
-            add_action( 'wp_enqueue_scripts', array( $this, 'manage_woocommerce_styles'), 99 );
+            // add_action( 'get_header', array( $this, 'conditionally_remove_wc_assets'), 99 );
+            // add_action( 'wp_enqueue_scripts', array( $this, 'manage_woocommerce_styles'), 99 );
 
             // Remove width and height dynamic attributes to thumbnails
             add_filter( 'post_thumbnail_html', array( $this, 'remove_thumbnail_dimensions'), 10 ); 

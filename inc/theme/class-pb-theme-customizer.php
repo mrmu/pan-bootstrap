@@ -149,6 +149,7 @@ if ( ! class_exists( 'PB_Theme_Customizer' ) ) {
                 ?>
                 <style type="text/css">
                 a{color: <?php echo $css_primary_color;?>;}
+                a.dropdown-item{color: <?php echo $css_primary_color;?>;}
                 .btn-primary{
                     background-color: <?php echo $css_primary_color;?>;
                     border-color: <?php echo $css_primary_color;?>;
@@ -166,6 +167,7 @@ if ( ! class_exists( 'PB_Theme_Customizer' ) ) {
                 ?>
                 <style type="text/css">
                 a:hover{color: <?php echo $css_primary_color_hover;?>;}
+                a.dropdown-item:hover{color: <?php echo $css_primary_color_hover;?>;}
                 .btn-primary:hover{
                     background-color: <?php echo $css_primary_color_hover;?>;
                     border-color: <?php echo $css_primary_color_hover;?>;
