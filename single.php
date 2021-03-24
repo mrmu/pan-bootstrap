@@ -21,7 +21,7 @@
 							<span class="author"><?php _e( 'Published by', 'pan-bootstrap' ); ?> <?php the_author_posts_link(); ?></span>
 							<span class="text-muted">|</span>
 							<span class="date">
-								<?php the_time('Y/m/d'); ?> <?php the_time('H:i:s'); ?>
+								<?php the_time('Y/m/d'); ?> <?php // the_time('H:i:s'); ?>
 							</span>
 							<span class="text-muted">|</span>
 							<span class="comments"><?php if (comments_open( get_the_ID() ) ) comments_popup_link( __( 'Leave your thoughts', 'pan-bootstrap' ), __( '1 Comment', 'pan-bootstrap' ), __( '% Comments', 'pan-bootstrap' )); ?></span>

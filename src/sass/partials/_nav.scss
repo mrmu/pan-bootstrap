@@ -4,6 +4,17 @@
  * Menus
  */
 
+#main_navbar{
+	background-color: #fff;
+	min-height: 63px;
+	padding: 0px;
+	.logo_wrap{
+		h1{
+			margin: 10px 0;
+			font-size: 32px;	
+		}
+	}
+}
 nav.fixed-top{
 	z-index: 20;
 }

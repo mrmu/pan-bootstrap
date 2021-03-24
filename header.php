@@ -20,9 +20,9 @@
 		?>
 		<!-- header -->
 		<header class="header main-header clear">
-			<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+			<nav id="main_navbar" class="navbar navbar-expand-lg fixed-top navbar-light">
 				<div class="container">
-					<a class="navbar-brand" href="<?php echo home_url(); ?>">
+					<a class="navbar-brand-link" href="<?php echo home_url(); ?>">
 						<div class="logo_wrap">
 							<?php
 							$custom_logo_id = get_theme_mod( 'custom_logo' );
