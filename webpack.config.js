@@ -192,13 +192,7 @@ module.exports = {
                 ],
             },{
                 test: /\.css$/i,
-                loader: 'css-loader',
-                options: {
-                  modules: {
-                    exportOnlyLocals: true,
-                    sourceMap: true,
-                  },
-                },
+                use: ["style-loader", "css-loader"],
             },
 
         ],
