@@ -4,11 +4,7 @@
 		<aside class="sidebar">
 
 			<div class="sidebar-widget">
-				<?php if(!function_exists('dynamic_sidebar') || !dynamic_sidebar('widget-area-1')) ?>
-			</div>
-
-			<div class="sidebar-widget">
-				<?php if(!function_exists('dynamic_sidebar') || !dynamic_sidebar('widget-area-2')) ?>
+				<?php if(!function_exists('dynamic_sidebar') || !dynamic_sidebar('main-sidebar')) ?>
 			</div>
 
 		</aside>

@@ -1,8 +1,4 @@
-// import $ from "jquery";
-// import "popper.js";
-// import "bootstrap";
 import 'bootstrap/dist/js/bootstrap.bundle'; //含 popper.js
-
 import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
 // import '@fortawesome/fontawesome-free/js/regular';
@@ -32,7 +28,7 @@ import "./sass/style.scss";
 			$('body').on('mouseenter mouseleave', '.dropdown', menu_toggle_dropdown);
 		}
 
-		$('#buttonsearch').click(function(){
+		$('#buttonsearch').on('click', function(e){
 			$('#formsearch').toggleClass( "d-xl-none" ).toggleClass( "pos_fixed" );
 			$('#searchbox').focus()
 			$('.openclosesearch').toggle();

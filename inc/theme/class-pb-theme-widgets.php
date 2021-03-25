@@ -39,27 +39,16 @@ if ( ! class_exists( 'PB_Theme_Widgets' ) ) {
         }
 
         public function widgets_init() {
-            // // Define Sidebar Widget Area 1
-            // register_sidebar(array(
-            //     'name' => __('Widget Area 1', 'pan-bootstrap'),
-            //     'description' => __('Description for this widget-area...', 'pan-bootstrap'),
-            //     'id' => 'widget-area-1',
-            //     'before_widget' => '<div id="%1$s" class="%2$s mb-2"><div class="card-body">',
-            //     'after_widget' => '</div></div>',
-            //     'before_title' => '<h3 class="card-title">',
-            //     'after_title' => '</h3>'
-            // ));
-        
-            // // Define Sidebar Widget Area 2
-            // register_sidebar(array(
-            //     'name' => __('Widget Area 2', 'pan-bootstrap'),
-            //     'description' => __('Description for this widget-area...', 'pan-bootstrap'),
-            //     'id' => 'widget-area-2',
-            //     'before_widget' => '<div id="%1$s" class="%2$s mb-2"><div class="card-body">',
-            //     'after_widget' => '</div></div>',
-            //     'before_title' => '<h3 class="card-title">',
-            //     'after_title' => '</h3>'
-            // ));
+            // Define Sidebar Widget Area 1
+            register_sidebar(array(
+                'name' => __('Main sidebar', 'pan-bootstrap'),
+                'description' => __('Description for this widget-area...', 'pan-bootstrap'),
+                'id' => 'main-sidebar',
+                'before_widget' => '<div id="%1$s" class="%2$s mb-2"><div class="card-body">',
+                'after_widget' => '</div></div>',
+                'before_title' => '<h3 class="card-title">',
+                'after_title' => '</h3>'
+            ));
         
             // Remove inline Recent Comment Styles from wp_head()
             $this->remove_recent_comments_style();

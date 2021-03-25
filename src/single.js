@@ -1,25 +1,7 @@
 import './global';
-import "./sass/style.scss";
-// import hljs from 'highlight.js/lib/highlight';
-// import hi_js from 'highlight.js/lib/languages/javascript';
-// import hi_css from 'highlight.js/lib/languages/css';
-// import hi_php from 'highlight.js/lib/languages/php';
-// import hi_xml from 'highlight.js/lib/languages/xml';
-// import hi_bash from 'highlight.js/lib/languages/bash';
-// import 'highlight.js/styles/github.css';
+import "./sass/single.scss";
 
 "use strict";
-
-// hljs.registerLanguage('javascript', hi_js);
-// hljs.registerLanguage('xml', hi_xml);
-// hljs.registerLanguage('bash', hi_bash);
-// hljs.registerLanguage('css', hi_css);
-// hljs.registerLanguage('php', hi_php);
-
-// // hljs.configure({useBR: true});
-// document.querySelectorAll('pre').forEach((block) => {
-// 	hljs.highlightBlock(block);
-// });
 
 (function($) {
 	$(function() {
@@ -61,7 +43,7 @@ import "./sass/style.scss";
 			return flag;
 			
 		}
-		$('form.comment-form').submit(function(event){
+		$('form.comment-form').on('submit', function(event){
 			return validateForm();
 		});
 	});
