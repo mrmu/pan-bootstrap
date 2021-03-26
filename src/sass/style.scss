@@ -13,14 +13,13 @@ This theme is licensed under the MIT.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 
-// Bootstrap
-
+// Bootstrap (140 KB) 確認每個頁面載一次就好
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "modules/bootstrap_colors";
 @import "~bootstrap/scss/bootstrap";
 
-// Modules
+// Modules (不使用就不佔空間) (變數, Mixins)
 @import "modules/variables";
 @import "modules/mixins";
 @import "modules/fonts";
@@ -35,3 +34,20 @@ Use it to make something cool, have fun, and share what you've learned with othe
 @import "partials/sidebar";
 @import "partials/footer";
 @import "partials/print";
+
+@import url(//fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@700&family=Noto+Sans+TC&family=Open+Sans&display=swap);
+
+@media print{
+    header nav, footer {
+        display: none;
+        }
+    .sticky-icon-box, .comment-box{
+        display: none;
+    }
+    .hide-on-print{
+        display: none;
+    }
+    a[href]:after {
+        content: none !important;
+      }
+}
