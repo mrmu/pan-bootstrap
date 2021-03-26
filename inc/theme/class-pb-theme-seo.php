@@ -23,11 +23,20 @@ if ( ! class_exists( 'PB_Theme_SEO' ) ) {
 		}
 
 		public function __construct() {
+			remove_action( 'wp_head', '_wp_render_title_tag', 1 ); // remove default title tag
 			add_action( 'after_setup_theme', array($this, 'add_theme_title_tag') );
 			add_filter( 'document_title_parts', array($this, 'custom_doc_title'), 10 );
-			remove_action( 'wp_head', '_wp_render_title_tag', 1 ); // remove default title tag
 			add_action( 'wp_head', array($this, 'insert_meta_in_head'), 5 );
-        }
+			add_filter('language_attributes', array($this, 'add_opengraph_doctype'));
+		}
+		
+		public function add_opengraph_doctype($output) {
+			return $output . '
+				xmlns="https://www.w3.org/1999/xhtml"
+				xmlns:og="https://ogp.me/ns#" 
+				xmlns:fb="http://www.facebook.com/2008/fbml"
+			';
+		}
 
 		// Let WordPress manage the document title.
 		public function add_theme_title_tag() {
