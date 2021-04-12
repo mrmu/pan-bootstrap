@@ -185,7 +185,7 @@ module.exports = {
                             // dart-sass 的非同步編輯比同步快兩倍，使用fiber 能在同步的程式碼path裡呼叫非同步的importer
                             implementation: require("sass"),
                             sassOptions: {
-                                fiber: require('fibers'),
+                                fiber: false, //require('fibers'),
                             },
                         }
                     }

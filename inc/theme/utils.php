@@ -49,22 +49,17 @@ if ( ! function_exists( 'pan_bootstrap_nav' ) ) {
  * 輸出分頁連結
  */
 if ( ! function_exists( 'pan_bootstrap_pagination' ) ) {
-	// Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
-	function pan_bootstrap_pagination()
+	function pan_bootstrap_pagination($query = null)
 	{
-		global $wp_query;
-		$big = 999999999;
-		$links = paginate_links(array(
-			'base' => str_replace($big, '%#%', get_pagenum_link($big)),
-			'format' => '?paged=%#%',
-			'current' => max(1, get_query_var('paged')),
-			'total' => $wp_query->max_num_pages,
-			'prev_text' => '<span class="border p-1">&lt;</span>',
-			'next_text' => '<span class="border p-1">&gt;</span>',
-			'before_page_number' => '<span class="border p-1">',
-			'after_page_number' => '</span>',
-		));
-
+		$links = get_the_posts_pagination(
+			array( 
+				'prev_text' => '<span class="paginate-next pt-2 pb-2 pr-2 pl-2">上一頁</span>',
+				'next_text' => '<span class="paginate-next pt-2 pb-2 pr-2 pl-2">下一頁</span>',
+				'before_page_number' => '<span class="paginate-number pt-2 pb-2 pr-3 pl-3">',
+				'after_page_number' => '</span>',
+			)
+		);
+	
 		if ( $links ) {
 			echo $links;
 		}
