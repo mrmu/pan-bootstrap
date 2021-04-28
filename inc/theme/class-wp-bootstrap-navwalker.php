@@ -215,8 +215,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 
 			// If the item has_children add atts to <a>.
 			if ( $this->has_children && 0 === $depth ) {
-				$atts['href']          = '#';
-				$atts['data-toggle']   = 'dropdown';
+				$atts['href']          = ! empty( $item->url ) ? $item->url : '#';
+				// $atts['data-toggle']   = 'dropdown'; // mark掉會讓主選單的項目可以點擊URL
 				$atts['aria-haspopup'] = 'true';
 				$atts['aria-expanded'] = 'false';
 				$atts['class']         = 'dropdown-toggle nav-link';
