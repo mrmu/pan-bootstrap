@@ -200,9 +200,6 @@ if ( ! function_exists( 'pb_get_post_thumbnail' ) ) {
 
 		// 設定預設佔位圖，如：get_template_directory_uri().'/images/def_thumbnail.jpg'
 		$def_thumbnail = apply_filters( 'pb_default_thumbnail', '');
-		if (empty($def_thumbnail)) {
-			$def_thumbnail = 'https://placehold.it/1200x628';
-		}
 
 		// 佈景預設 banner 圖
 		return $def_thumbnail;
