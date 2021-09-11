@@ -86,7 +86,9 @@ if ( ! class_exists( 'PB_Theme_SEO' ) ) {
 			echo '<meta property="og:site_name" content="' . get_bloginfo('sitename') . '"/>'."\n";
 			echo '<meta property="og:description" content="' . $metas['desc'] . '"/>'."\n";
 			foreach ($metas['images'] as $img_url) {
-				echo '<meta property="og:image" content="' . $img_url . '"/>'."\n";
+				if (!empty($img_url)) {
+					echo '<meta property="og:image" content="' . $img_url . '"/>'."\n";
+				}
 			}
 		}
     }
