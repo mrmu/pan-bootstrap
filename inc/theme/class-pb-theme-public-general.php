@@ -56,9 +56,9 @@ if ( ! class_exists( 'PB_Theme_Public_General' ) ) {
 
                 wp_register_script( 
                     'jquery', 
-                    includes_url( '/js/jquery/jquery.js' ), 
+                    includes_url( '/js/jquery/jquery.min.js' ), 
                     false,  // deps
-                    null, // ver 
+                    '3.6.0', // ver 
                     true  // footer
                 );
                 wp_enqueue_script( 'jquery' );
